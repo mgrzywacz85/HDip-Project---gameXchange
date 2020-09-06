@@ -1,0 +1,12 @@
+body {
+  background-color: #EAEAEA;
+}
+
+.ui.fixed.menu {
+  background: linear-gradient(138deg, rgba(41,62,150,1) 0%, rgba(41,77,133,1) 31%, rgba(63,164,171,1) 91%);
+}
+
+.ui.main.container {
+  margin-top: 10em;
+}
+
