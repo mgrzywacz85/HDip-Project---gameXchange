@@ -12,6 +12,21 @@ export const testing1 = [
                 id: 'a',
                 name: 'Mary',
                 photoURL: 'https://randomuser.me/api/portraits/women/85.jpg'
+            },
+            {
+                id: 'b',
+                name: 'Paul',
+                photoURL: 'https://randomuser.me/api/portraits/men/23.jpg'
+            },
+            {
+                id: 'c',
+                name: 'Thomas',
+                photoURL: 'https://randomuser.me/api/portraits/men/11.jpg'
+            },
+            {
+                id: 'd',
+                name: 'Jenny',
+                photoURL: 'https://randomuser.me/api/portraits/women/92.jpg'
             }
         ]
     },
@@ -28,6 +43,11 @@ export const testing1 = [
                 id: 'a',
                 name: 'David',
                 photoURL: 'https://randomuser.me/api/portraits/men/52.jpg'
+            },
+            {
+                id: 'b',
+                name: 'Rafael',
+                photoURL: 'https://randomuser.me/api/portraits/men/41.jpg'
             }
         ]
     }

@@ -13,26 +13,27 @@ export default function PublicPost({event}){
                         <Item.Content>
                             <Item.Header content={event.title} />
                             <Item.Description>
-                                {event.postedBy}
+                                {event.date}                   
+                            </Item.Description>
+                            <Item.Description>
+                                Posted by {event.postedBy}                
+                            </Item.Description>
+                            <Item.Description>
+                                <Icon name='marker' /> {event.location}                    
                             </Item.Description>
                         </Item.Content>
                     </Item>
                 </Item.Group>
             </Segment>
             <Segment>
-                <span>
-                    <Icon name='clock' /> {event.date}
-                </span>
+            <div>{event.description}</div>
             </Segment>
-            <Segment secondary>
+            <Segment secondary clearing>
                 <List horizontal>
                     {event.responders.map(responder => (
                         <PublicPostResponder key={responder.id} responder={responder}/>
                     ))}
                 </List>
-            </Segment>
-            <Segment clearing>
-                <div>{event.description}</div>
                 <Button color='blue' floated='right' content='View'/>
             </Segment>
         </Segment.Group>

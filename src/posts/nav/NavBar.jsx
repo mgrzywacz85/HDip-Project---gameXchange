@@ -9,9 +9,8 @@ export default function NavBar() {
                     <img src="/img/logo.png" alt="logo" style={{marginRight: 12}}/>
                     GameXchange Dublin
                 </Menu.Item>
-                <Menu.Item name='Home' />
                 <Menu.Item>
-                    <Button color='blue' inverted content='Post Xchange'/>
+                    <Button basic color='blue' inverted content='Post Xchange'/>
                 </Menu.Item>
                 <Menu.Item position='right'>
                     <Button basic inverted content='Login'/>

@@ -9,19 +9,13 @@ export default function PostForm(){
             <Header content='Post new Xchange' />
             <Form>
                 <Form.Field>
-                    <input type="text" placeholder='Your Xchange Title' />
+                    <input type="text" placeholder='Xchange Title' />
                 </Form.Field>
                 <Form.Field>
                     <input type="text" placeholder='Description' />
                 </Form.Field>
                 <Form.Field>
-                    <input type="text" placeholder='Looking for' />
-                </Form.Field>
-                <Form.Field>
-                    <input type="text" placeholder='Xchange Location' />
-                </Form.Field>
-                <Form.Field>
-                    <input type="date" placeholder='Xchange Date' />
+                    <input type="text" placeholder='Preferred Location' />
                 </Form.Field>
                 <Button type='submit' floated='right' content='Cancel'/>
                 <Button type='submit' floated='right' content='Submit' color='blue' />
