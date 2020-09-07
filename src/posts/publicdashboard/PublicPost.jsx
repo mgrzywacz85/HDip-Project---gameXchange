@@ -2,6 +2,7 @@ import React from 'react';
 import { Segment, Item, Icon, List, Button } from 'semantic-ui-react';
 import PublicPostResponder from './PublicPostResponder';
 
+
 export default function PublicPost(){
     return(
         <Segment.Group>

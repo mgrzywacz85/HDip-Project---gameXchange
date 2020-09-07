@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
-import PublicPostList from './PublicPostList'
+import PublicPostList from './PublicPostList';
+import XchangeForm from '../xchangeForm/XchangeForm'
 
 export default function PublicPosts(){
     return (
@@ -9,7 +10,7 @@ export default function PublicPosts(){
                 <PublicPostList />
             </Grid.Column>
             <Grid.Column width={6} >
-                <h2>Right column</h2>   
+                <XchangeForm />
             </Grid.Column>
         </Grid>
     )
