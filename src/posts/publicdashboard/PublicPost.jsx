@@ -3,17 +3,17 @@ import { Segment, Item, Icon, List, Button } from 'semantic-ui-react';
 import PublicPostResponder from './PublicPostResponder';
 
 
-export default function PublicPost(){
+export default function PublicPost({event}){
     return(
         <Segment.Group>
             <Segment>
                 <Item.Group>
                     <Item>
-                        <Item.Image size='tiny' circular src='/img/user.png' />
+                        <Item.Image size='tiny' circular src={event.userPhotoURL} />
                         <Item.Content>
-                            <Item.Header content='Post title' />
+                            <Item.Header content={event.title} />
                             <Item.Description>
-                                Ratchet and Clank PS4
+                                {event.postedBy}
                             </Item.Description>
                         </Item.Content>
                     </Item>
@@ -21,19 +21,19 @@ export default function PublicPost(){
             </Segment>
             <Segment>
                 <span>
-                    <Icon name='clock' /> Date
+                    <Icon name='clock' /> {event.date}
                 </span>
             </Segment>
             <Segment secondary>
                 <List horizontal>
-                    <PublicPostResponder />
-                    <PublicPostResponder />
-                    <PublicPostResponder />
+                    {event.responders.map(responder => (
+                        <PublicPostResponder key={responder.id} responder={responder}/>
+                    ))}
                 </List>
             </Segment>
             <Segment clearing>
-                <div>Offer description</div>
-                <Button color='teal' floated='right' content='View'/>
+                <div>{event.description}</div>
+                <Button color='blue' floated='right' content='View'/>
             </Segment>
         </Segment.Group>
     )

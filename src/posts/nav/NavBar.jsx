@@ -11,7 +11,7 @@ export default function NavBar() {
                 </Menu.Item>
                 <Menu.Item name='Home' />
                 <Menu.Item>
-                    <Button positive inverted content='Post Xchange'/>
+                    <Button color='blue' inverted content='Post Xchange'/>
                 </Menu.Item>
                 <Menu.Item position='right'>
                     <Button basic inverted content='Login'/>
