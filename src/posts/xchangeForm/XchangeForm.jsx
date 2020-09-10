@@ -1,7 +1,7 @@
 import React from 'react';
 import { Segment, Header, Form, Button } from 'semantic-ui-react';
 
-export default function PostForm(){
+export default function XchangeForm({setFormOpen}){
     return(
 
         //Adding the clearing property helps align the buttons under the fields correctly
@@ -17,7 +17,7 @@ export default function PostForm(){
                 <Form.Field>
                     <input type="text" placeholder='Preferred Location' />
                 </Form.Field>
-                <Button type='submit' floated='right' content='Cancel'/>
+                <Button onClick={() => setFormOpen(false)} type='submit' floated='right' content='Cancel'/>
                 <Button type='submit' floated='right' content='Submit' color='blue' />
             </Form>
         </Segment>
