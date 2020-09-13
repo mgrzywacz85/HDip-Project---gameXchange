@@ -1,11 +1,11 @@
 import React from 'react';
 import PublicPost from './PublicPost';
 
-export default function PublicPostList({events}){
+export default function PublicPostList({posts, selectPost}){
     return(
         <>
-        {events.map(event => (
-            <PublicPost event={event} key={event.id} />
+        {posts.map(post => (
+            <PublicPost post={post} key={post.id} selectPost={selectPost}/>
         )) }
         </>
 

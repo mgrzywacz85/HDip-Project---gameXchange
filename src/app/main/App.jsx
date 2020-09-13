@@ -5,12 +5,30 @@ import PublicDashboard from '../../posts/publicDashboard/PublicDashboard';
 
 export default function App() {
   const [formOpen, setFormOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+
+    function handleSelectPost(post){
+    setSelectedPost(post);
+    setFormOpen(true);
+  }
+
+    function handleOpenNewPostForm() {
+      setSelectedPost(null);
+      setFormOpen(true);
+    }
+
+
 
   return (
     <>
-      <NavBar setFormOpen={setFormOpen} />
+      <NavBar setFormOpen={handleOpenNewPostForm} />
       <Container className='main'>
-        <PublicDashboard formOpen={formOpen} setFormOpen={setFormOpen}/>
+        <PublicDashboard 
+        formOpen={formOpen} 
+        setFormOpen={setFormOpen} 
+        selectPost={handleSelectPost}
+        selectedPost={selectedPost}
+        />
       </Container>      
     </>
   );
