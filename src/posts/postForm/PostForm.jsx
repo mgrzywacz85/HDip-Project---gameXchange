@@ -2,7 +2,7 @@ import cuid from 'cuid';
 import React, {useState} from 'react';
 import { Segment, Header, Form, Button } from 'semantic-ui-react';
 
-export default function XchangeForm({setFormOpen, setPosts, createPost, selectedPost}){
+export default function PostForm({setFormOpen, setPosts, createPost, selectedPost, updatePost}){
     
     
     const defaultValues = selectedPost ?? {
@@ -17,7 +17,11 @@ export default function XchangeForm({setFormOpen, setPosts, createPost, selected
     function handleSubmitNewPost(){
         var today = new Date();
         var currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+        selectedPost ? 
+        updatePost({...selectedPost, ...values}) : 
         createPost({...values, id: cuid(), userPhotoURL: '././img/user.png', date: currentDate, postedBy: 'Marcin', responders: []});
+        
         setFormOpen(false);
     }
 

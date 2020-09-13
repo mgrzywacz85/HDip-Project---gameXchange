@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import NavBar from '../../posts/nav/NavBar';
 import { Container } from 'semantic-ui-react';
-import PublicDashboard from '../../posts/publicDashboard/PublicDashboard';
+import PostDashboard from '../../posts/postDashboard/PostDashboard';
 
 export default function App() {
   const [formOpen, setFormOpen] = useState(false);
@@ -23,7 +23,7 @@ export default function App() {
     <>
       <NavBar setFormOpen={handleOpenNewPostForm} />
       <Container className='main'>
-        <PublicDashboard 
+        <PostDashboard 
         formOpen={formOpen} 
         setFormOpen={setFormOpen} 
         selectPost={handleSelectPost}

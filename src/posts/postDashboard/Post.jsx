@@ -1,9 +1,9 @@
 import React from 'react';
 import { Segment, Item, Icon, List, Button } from 'semantic-ui-react';
-import PublicPostResponder from './PublicPostResponder';
+import PostResponder from './PostResponder';
 
 
-export default function PublicPost({post, selectPost}){
+export default function Post({post, selectPost, deletePost}){
     return(
         <Segment.Group>
             <Segment>
@@ -31,9 +31,14 @@ export default function PublicPost({post, selectPost}){
             <Segment secondary clearing>
                 <List horizontal>
                     {post.responders.map(responder => (
-                        <PublicPostResponder key={responder.id} responder={responder}/>
+                        <PostResponder key={responder.id} responder={responder}/>
                     ))}
                 </List>
+                <Button 
+                onClick={() => deletePost(post.id)} 
+                color='grey' 
+                floated='right' 
+                content='Remove'/>
                 <Button 
                 onClick={() => selectPost(post)} 
                 color='blue' 
