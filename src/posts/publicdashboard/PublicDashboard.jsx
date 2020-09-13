@@ -7,6 +7,10 @@ import {testing1} from '../../app/mockAPIForTesting/testing1';
 export default function PublicPosts({formOpen, setFormOpen}){
     const [events, setEvents] = useState(testing1);
 
+    function handleCreateEvent(event){
+        setEvents([...events, event])
+    }
+
     return (
         <Grid>
             <Grid.Column width={10} >
@@ -14,7 +18,11 @@ export default function PublicPosts({formOpen, setFormOpen}){
             </Grid.Column>
             <Grid.Column width={6} >
                 {formOpen && 
-                <XchangeForm setFormOpen={setFormOpen}/>}
+                <XchangeForm 
+                setFormOpen={setFormOpen} 
+                setEvents={setEvents}
+                createEvent={handleCreateEvent}
+                />}
             </Grid.Column>
         </Grid>
     )
