@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { Menu, Container, Button } from "semantic-ui-react";
 import LoggedOut from "../loggingState/LoggedOut";
 import LoggedIn from "../loggingState/LoggedIn";
@@ -7,6 +7,12 @@ import { useState } from "react";
 
 export default function NavBar({ setFormOpen }) {
   const [loggedIn, setLoggedIn] = useState(false);
+  const history = useHistory();
+
+  function handleLogOut(){
+    setLoggedIn(false);
+    history.push('/');
+  }
 
   return (
     <Menu inverted fixed='top'>
@@ -27,7 +33,7 @@ export default function NavBar({ setFormOpen }) {
                 who are logged in */}
 
         {loggedIn ? (
-          <LoggedIn setLoggedIn={setLoggedIn} />
+          <LoggedIn LogOut={handleLogOut} />
         ) : (
           <LoggedOut setLoggedIn={setLoggedIn} />
         )}

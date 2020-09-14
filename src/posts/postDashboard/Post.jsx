@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Segment, Item, Icon, List, Button } from 'semantic-ui-react';
 import PostResponder from './PostResponder';
 
@@ -40,7 +41,7 @@ export default function Post({post, selectPost, deletePost}){
                 floated='right' 
                 content='Remove'/>
                 <Button 
-                onClick={() => selectPost(post)} 
+                as={Link} to={`/posts/${post.id}`} //backticks = template literals - allow to use JS to specify which post to route to
                 color='blue' 
                 floated='right' 
                 content='View'/>
