@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container } from "semantic-ui-react";
 import { Route } from "react-router-dom";
 import HomePage from "../../home/HomePage";
@@ -8,18 +8,6 @@ import PostForm from "../../posts/postForm/PostForm";
 import PostDetails from "../../posts/postDetails/PostDetails";
 
 export default function App() {
-  const [formOpen, setFormOpen] = useState(false);
-  const [selectedPost, setSelectedPost] = useState(null);
-
-  function handleSelectPost(post) {
-    setSelectedPost(post);
-    setFormOpen(true);
-  }
-
-  function handleOpenNewPostForm() {
-    setSelectedPost(null);
-    setFormOpen(true);
-  }  
 
   return (
     <>
@@ -29,7 +17,7 @@ export default function App() {
         path={"/(.+)"}
         render={() => (
           <>
-            <NavBar setFormOpen={handleOpenNewPostForm} />
+            <NavBar />
             <Container className='main'>
               <Route exact path='/posts' component={PostDashboard} />
               <Route path='/posts/:id' component={PostDetails} />
