@@ -35,7 +35,7 @@ export default function PostForm({setFormOpen, setPosts, createPost, selectedPos
 
         //Adding the clearing property helps align the buttons under the fields correctly
         <Segment clearing>
-            <Header content={selectedPost ? 'Edit Xchange' : 'Post new Xchange'} />
+            <Header content={selectedPost ? 'Edit Xchange' : 'Create Xchange'} />
             <Form onSubmit={handleSubmitNewPost}>
                 <Form.Field>
                     <input 
