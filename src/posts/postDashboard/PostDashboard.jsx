@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import PostList from './PostList';
-import {testing1} from '../../app/mockAPIForTesting/testing1';
+import { useSelector } from 'react-redux';
 
 export default function PostDashboard(){
-    const [posts, setPosts] = useState(testing1);
+    const {posts} = useSelector(state => state.post);
     
     // function handleCreatePost(post){
     //     setPosts([...posts, post])
@@ -17,7 +17,7 @@ export default function PostDashboard(){
     // }
 
     function handleDeletePost(postID){
-        setPosts(posts.filter(post => post.id !== postID));
+        //setPosts(posts.filter(post => post.id !== postID));
 
         //this will iterate over all the events inside posts and will return all posts whose id doesn't match the selected ID
         //but the one that matches will not be returned, therefore all but the selected post will be returned
