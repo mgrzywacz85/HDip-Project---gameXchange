@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import PostList from './PostList';
 import { useSelector } from 'react-redux';
+import { deletePost } from '../postRedux/PostActions';
 
 export default function PostDashboard(){
     const {posts} = useSelector(state => state.post);
@@ -16,18 +17,18 @@ export default function PostDashboard(){
     //     setPosts(posts.map(post => post.id === updatedPost.id ? updatedPost : post));
     // }
 
-    function handleDeletePost(postID){
-        //setPosts(posts.filter(post => post.id !== postID));
+    // function handleDeletePost(postID){
+    //     //setPosts(posts.filter(post => post.id !== postID));
 
-        //this will iterate over all the events inside posts and will return all posts whose id doesn't match the selected ID
-        //but the one that matches will not be returned, therefore all but the selected post will be returned
-        //effectively removing the post with the selected ID
-    }
+    //     //this will iterate over all the events inside posts and will return all posts whose id doesn't match the selected ID
+    //     //but the one that matches will not be returned, therefore all but the selected post will be returned
+    //     //effectively removing the post with the selected ID
+    // }
 
     return (
         <Grid centered>
             <Grid.Column width={12} >
-                <PostList posts={posts} deletePost={handleDeletePost}/>
+                <PostList posts={posts} deletePost={deletePost}/>
             </Grid.Column>
         </Grid>
     )

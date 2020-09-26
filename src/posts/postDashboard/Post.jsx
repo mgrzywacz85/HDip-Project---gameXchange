@@ -35,14 +35,14 @@ export default function Post({ post }) {
           ))}
         </List>
         <Button
-          onClick={() => dispatch(deletePost(post.id))}
+          onClick={() => dispatch(deletePost(post))}
           color='grey'
           floated='right'
           content='Remove'
         />
         <Button
           as={Link}
-          to={`/posts/${post.id}`} //backticks = template literals - allow to use JS to specify which post to route to
+          to={`/posts/${post.id}`} //IMPORTANT = backticks = template literals - allow to use JS to specify which post to route to
           color='blue'
           floated='right'
           content='View'

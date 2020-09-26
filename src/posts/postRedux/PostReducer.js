@@ -1,25 +1,25 @@
 import { testing1 } from "../../app/mockAPIForTesting/testing1";
 
-const defaultState = {
-  posts: testing1
+const initialState = {
+  posts: testing1,
 };
 
-export default function postReducer(state = defaultState, { type, payload }) {
+export default function postReducer(state = initialState, { type, payload }) {
   switch (type) {
-    case 'CREATE_POST':
+    case "CREATE_POST":
       return {
         ...state,
-        posts: [...state.posts, payload],
+        posts: [...state.posts, payload]
       };
-    case 'UPDATE_POST':
+    case "UPDATE_POST":
       return {
         ...state,
-        posts: [state.posts.filter(post => post.id !== payload.id), payload],
+        posts: [...state.posts.filter((selectedPost) => selectedPost.id !== payload.id), payload]
       };
-    case 'DELETE_POST':
+    case "DELETE_POST":
       return {
         ...state,
-        posts: [state.posts.filter(post => post.id !== payload)],
+        posts: [...state.posts.filter((selectedPost) => selectedPost.id !== payload.id)]
       };
     default:
       return state;
