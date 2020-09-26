@@ -1,11 +1,11 @@
 import React from "react";
 import { Segment, Button } from "semantic-ui-react";
 
-export default function PostDetailsTitle({post}) {
+export default function PostDetailsTitle({detailedPost}) {
   return (
     <Segment.Group>
       <Segment attached='top'>
-        <h3>{post.description}</h3>
+        <h3>{detailedPost.description}</h3>
         <p/>
         <h4>... and photos will go here.</h4>
       </Segment>

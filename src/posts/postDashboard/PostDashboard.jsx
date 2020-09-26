@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { deletePost } from '../postRedux/PostActions';
 
 export default function PostDashboard(){
-    const {posts} = useSelector(state => state.post);
+    const {posts} = useSelector(state => state.postStore);
     
     // function handleCreatePost(post){
     //     setPosts([...posts, post])

@@ -6,13 +6,13 @@ import PostDetailsChat from './PostDetailsChat';
 import { useSelector } from 'react-redux';
 
 export default function PostDetails({match}){
-    const post = useSelector(state => state.post.posts.find(post => post.id === match.params.id))
+    const detailedPost = useSelector(state => state.postStore.posts.find(selectedPost => selectedPost.id === match.params.id))
     
     return(
         <Grid centered>
             <Grid.Column width={10} >
-                <PostDetailsTitle post={post} />
-                <PostDetailsMain post={post} />
+                <PostDetailsTitle detailedPost={detailedPost} />
+                <PostDetailsMain detailedPost={detailedPost} />
                 <PostDetailsChat />
             </Grid.Column>
         </Grid>
