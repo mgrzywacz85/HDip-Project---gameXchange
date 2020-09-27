@@ -1,23 +1,23 @@
 import cuid from "cuid";
 import React, { useState } from "react";
 import { Segment, Header, Form, Button, Grid } from "semantic-ui-react";
+import { useDispatch, useSelector} from 'react-redux';
+import {updatePost, createPost} from '../postRedux/PostActions';
 
-export default function PostForm({
-  setFormOpen,
-  setPosts,
-  createPost,
-  selectedPost,
-  updatePost,
-}) {
-  const defaultValues = selectedPost ?? {
+export default function PostForm({ match, history }) {
+  const dispatch = useDispatch();
+
+  const selectedPost = useSelector(state => state.postStore.posts.find(post => post.id === match.params.id))
+
+  const initialValues = selectedPost ?? {
     title: "",
     description: "",
     preferredlocation: "",
   };
 
-  const [values, setValues] = useState(defaultValues);
+  const [values, setValues] = useState(initialValues);
 
-  function handleSubmitNewPost() {
+  function submitNewPost() {
     var today = new Date();
     var currentDate =
       today.getFullYear() +
@@ -27,20 +27,19 @@ export default function PostForm({
       today.getDate();
 
     selectedPost
-      ? updatePost({ ...selectedPost, ...values })
-      : createPost({
+      ? dispatch(updatePost({ ...selectedPost, ...values }))
+      : dispatch(createPost({
           ...values,
           id: cuid(),
           userPhotoURL: "././img/user.png",
           date: currentDate,
-          postedBy: "Marcin",
+          postedBy: "User",
           responders: [],
-        });
-
-    setFormOpen(false);
+        }));
+        history.push('/posts');
   }
 
-  function handleChangeInput(post) {
+  function changeInput(post) {
     const { name, value } = post.target;
     setValues({ ...values, [name]: value });
   }
@@ -54,14 +53,14 @@ export default function PostForm({
             size='large'
             content={selectedPost ? "Edit Xchange" : "Create Xchange"}
           />
-          <Form onSubmit={handleSubmitNewPost}>
+          <Form onSubmit={submitNewPost}>
             <Form.Field>
               <input
                 name='title'
                 type='text'
                 placeholder='Xchange Title'
                 value={values.title}
-                onChange={(post) => handleChangeInput(post)}
+                onChange={(post) => changeInput(post)}
               />
             </Form.Field>
             <Form.Field>
@@ -70,7 +69,7 @@ export default function PostForm({
                 type='text'
                 placeholder='Description'
                 value={values.description}
-                onChange={(post) => handleChangeInput(post)}
+                onChange={(post) => changeInput(post)}
               />
             </Form.Field>
             <Form.Field>
@@ -79,11 +78,10 @@ export default function PostForm({
                 type='text'
                 placeholder='Preferred Location'
                 value={values.preferredlocation}
-                onChange={(post) => handleChangeInput(post)}
+                onChange={(post) => changeInput(post)}
               />
             </Form.Field>
-            <Button
-              onClick={() => setFormOpen(false)}
+            <Button              
               type='submit'
               floated='right'
               content='Cancel'

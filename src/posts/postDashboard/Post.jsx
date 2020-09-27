@@ -36,9 +36,8 @@ export default function Post({ post }) {
         </List>
         <Button
           onClick={() => dispatch(deletePost(post))}
-          color='grey'
           floated='right'
-          content='Remove'
+          content='Delete'
         />
         <Button
           as={Link}
