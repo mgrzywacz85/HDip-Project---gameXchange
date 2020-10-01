@@ -10,12 +10,22 @@ export default function HomePage({ history }) {
         </Header>
           <Button
             onClick={() => history.push("/posts")}
-            size='big'
+            size='huge'
             inverted
             style={{ marginTop: 50 }}
           >
             Login
           </Button>
+
+          <Button
+            onClick={() => history.push("/posts")}
+            size='huge'
+            inverted
+            style={{ marginTop: 20 }}
+          >
+            Register
+          </Button>
+
       </Container>
     </Segment>
   );

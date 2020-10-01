@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Segment, Button } from "semantic-ui-react";
+import { Segment, Button, Item } from "semantic-ui-react";
 
 export default function PostDetailsTitle({ detailedPost }) {
 
@@ -9,11 +9,13 @@ export default function PostDetailsTitle({ detailedPost }) {
       <Segment attached='top'>
         <h3>{detailedPost.description}</h3>
         <p />
-        <h4>... and photos will go here.</h4>
+        <Item>
+          <Item.Image size='large' src={detailedPost.photo} />
+        </Item>
       </Segment>
 
       <Segment attached='bottom' clearing>
-        <Button color='blue'>Accept Xchange</Button>
+        <Button color='violet'>Accept Xchange</Button>
         <Button as={Link} to={`/edit/${detailedPost.id}`} floated='right'>
           Edit
         </Button>

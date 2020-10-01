@@ -4,29 +4,30 @@ export const testing1 = [
         title: 'Ratchet and Clank PS4',
         date: '2020-09-02',
         description: 'Launch version in great condition, no scratches, like brand new!',
+        photo: 'https://pbs.twimg.com/media/CeaQmsqUMAElRat.jpg',
         preferredlocation: 'The Spire, Dublin City Centre',
-        postedBy: 'Stephen',
-        userPhotoURL: 'https://randomuser.me/api/portraits/men/81.jpg',
+        postedBy: 'Elliot',
+        userPhotoURL: 'https://react.semantic-ui.com/images/avatar/small/elliot.jpg',
         responders: [
             {
                 id: 'a',
-                name: 'Mary',
-                photoURL: 'https://randomuser.me/api/portraits/women/85.jpg'
+                name: 'Elliot',
+                userphotoURL: 'https://react.semantic-ui.com/images/avatar/small/elliot.jpg'
             },
             {
                 id: 'b',
-                name: 'Paul',
-                photoURL: 'https://randomuser.me/api/portraits/men/23.jpg'
+                name: 'Elliot',
+                userphotoURL: 'https://react.semantic-ui.com/images/avatar/small/elliot.jpg'
             },
             {
                 id: 'c',
-                name: 'Thomas',
-                photoURL: 'https://randomuser.me/api/portraits/men/11.jpg'
+                name: 'Elliot',
+                userphotoURL: 'https://react.semantic-ui.com/images/avatar/small/elliot.jpg'
             },
             {
                 id: 'd',
-                name: 'Jenny',
-                photoURL: 'https://randomuser.me/api/portraits/women/92.jpg'
+                name: 'Elliot',
+                userphotoURL: 'https://react.semantic-ui.com/images/avatar/small/elliot.jpg'
             }
         ]
     },
@@ -35,19 +36,20 @@ export const testing1 = [
         title: 'Gran Turismo PS4',
         date: '2020-09-04',
         description: 'Good condition, plays great',
+        photo: 'https://i.redd.it/x6fx5g8ihr621.jpg',
         preferredlocation:'Dublin 15',
-        postedBy: 'Martin',
-        userPhotoURL: 'https://randomuser.me/api/portraits/men/79.jpg',
+        postedBy: 'Joe',
+        userPhotoURL: 'https://react.semantic-ui.com/images/avatar/small/joe.jpg',
         responders: [
             {
                 id: 'a',
-                name: 'David',
-                photoURL: 'https://randomuser.me/api/portraits/men/52.jpg'
+                name: 'Joe',
+                userphotoURL: 'https://react.semantic-ui.com/images/avatar/small/joe.jpg'
             },
             {
                 id: 'b',
-                name: 'Rafael',
-                photoURL: 'https://randomuser.me/api/portraits/men/41.jpg'
+                name: 'Joe',
+                userphotoURL: 'https://react.semantic-ui.com/images/avatar/small/joe.jpg'
             }
         ]
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Segment, Item, Icon, List, Button } from "semantic-ui-react";
+import { Segment, Item, Icon, Button } from "semantic-ui-react";
 import PostResponder from "./PostResponder";
 import { deletePost } from "../postRedux/PostActions";
 
@@ -26,14 +26,14 @@ export default function Post({ post }) {
         </Item.Group>
       </Segment>
       <Segment>
-        <div>{post.description}</div>
+        <Item>
+          <Item.Content>
+            <Item.Header content={post.description} style={{fontSize: 20}} />
+          </Item.Content>
+          <Item.Image size='small' src={post.photo} style={{ marginTop: 30 }} />
+      </Item>
       </Segment>
       <Segment secondary clearing>
-        <List horizontal>
-          {post.responders.map((responder) => (
-            <PostResponder key={responder.id} responder={responder} />
-          ))}
-        </List>
         <Button
           onClick={() => dispatch(deletePost(post))}
           floated='right'
@@ -42,9 +42,9 @@ export default function Post({ post }) {
         <Button
           as={Link}
           to={`/posts/${post.id}`} //IMPORTANT = backticks = template literals - allow to use JS to specify which post to route to
-          color='blue'
-          floated='right'
-          content='View'
+          color='violet'
+          floated='left'
+          content='View details'
         />
       </Segment>
     </Segment.Group>

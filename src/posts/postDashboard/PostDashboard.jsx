@@ -9,8 +9,8 @@ export default function PostDashboard(){
     //previous handler functions no longer needed after moving to Redux
 
     return (
-        <Grid centered>
-            <Grid.Column width={12} >
+        <Grid  centered>
+            <Grid.Column width={10} >
                 <PostList posts={posts}/>
             </Grid.Column>
         </Grid>
