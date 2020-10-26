@@ -1,4 +1,4 @@
-import { testing1 } from "../../../app/mockAPIForTesting/testing1";
+import { testing1 } from "../../mockAPIForTesting/testing1";
 
 const initialState = {
   posts: testing1,
