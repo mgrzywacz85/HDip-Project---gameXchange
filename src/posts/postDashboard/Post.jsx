@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Segment, Item, Icon, Button } from "semantic-ui-react";
-import PostResponder from "./PostResponder";
 import { deletePost } from "../postRedux/PostActions";
 
 export default function Post({ post }) {
