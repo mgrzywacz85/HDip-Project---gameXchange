@@ -10,11 +10,11 @@ import Login from "../../components/auth/Login";
 import Register from "../../components/auth/Register";
 
 export default function App() {
-  const {key} = useLocation();
+  const { key } = useLocation();
 
   return (
     <>
-      <Route exact path='/' component={ LandingPage } />
+      <Route exact path='/' component={LandingPage} />
 
       <Route
         path={"/(.+)"} //expression which helps separate the Home page from the NavBar
@@ -22,11 +22,15 @@ export default function App() {
           <>
             <NavBar />
             <Container className='main'>
-              <Route exact path='/login' component={Login} />
-              <Route exact path='/register' component={Register} />
               <Route exact path='/posts' component={PostDashboard} />
               <Route path='/posts/:id' component={PostDetails} />
-              <Route path={['/newPost','/edit/:id']} component={PostForm} locationKey={key} />
+              <Route exact path='/login' component={Login} />
+              <Route exact path='/register' component={Register} />
+              <Route
+                path={["/newPost", "/edit/:id"]}
+                component={PostForm}
+                locationKey={key}
+              />
             </Container>
           </>
         )}

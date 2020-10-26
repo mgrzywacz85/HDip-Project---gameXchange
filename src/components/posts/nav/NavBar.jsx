@@ -9,19 +9,27 @@ export default function NavBar({ setFormOpen }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const history = useHistory();
 
-  function handleLogOut(){
+  function handleLogOut() {
     setLoggedIn(false);
-    history.push('/');
+    history.push("/");
   }
 
   return (
     <Menu inverted fixed='top'>
       <Container>
-        <Menu.Item as={NavLink} exact to='/' header>
-          <img src='/img/logo.png' alt='logo' style={{ marginRight: 12 }} />
-          GameXchange Dublin
-        </Menu.Item>
-        <Menu.Item as={NavLink} exact to='/posts' name='Posts' />
+        {loggedIn ? (
+          <Menu.Item as={NavLink} exact to='/' header>
+            <img src='/img/logo.png' alt='logo' style={{ marginRight: 12 }} />
+            GameXchange Dublin
+          </Menu.Item>
+        ) : (
+          <Menu.Item>
+            <img src='/img/logo.png' alt='logo' style={{ marginRight: 12 }} />
+            GameXchange Dublin
+          </Menu.Item>
+        )}
+
+        {loggedIn && <Menu.Item as={NavLink} exact to='/posts' name='Posts' />}
 
         {loggedIn && (
           <Menu.Item as={NavLink} to='/newPost' name='New Post'>
