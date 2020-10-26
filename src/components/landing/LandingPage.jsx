@@ -1,7 +1,7 @@
 import React from "react";
 import { Segment, Container, Header, Button } from "semantic-ui-react";
 
-export default function HomePage({ history }) {
+export default function LandingPage({ history }) {
   return (
     <Segment className='homepage' inverted vertical textAlign='center'>
       <Container>
@@ -9,7 +9,7 @@ export default function HomePage({ history }) {
           GameXchange Dublin
         </Header>
           <Button
-            onClick={() => history.push("/posts")}
+            onClick={() => history.push("/login")}
             size='huge'
             inverted
             style={{ marginTop: 50 }}
@@ -18,12 +18,21 @@ export default function HomePage({ history }) {
           </Button>
 
           <Button
-            onClick={() => history.push("/posts")}
+            onClick={() => history.push("/register")}
             size='huge'
             inverted
             style={{ marginTop: 20 }}
           >
             Register
+          </Button>
+
+          <Button
+            onClick={() => history.push("/posts")}
+            size='huge'
+            inverted
+            style={{ marginTop: 20 }}
+          >
+            Hack
           </Button>
 
       </Container>
