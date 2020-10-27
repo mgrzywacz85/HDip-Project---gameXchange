@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { Container } from "semantic-ui-react";
 import { Route, useLocation } from "react-router-dom";
 import NavBar from "../../components/posts/nav/NavBar";
@@ -12,26 +12,33 @@ import Alert from '../alert/Alert';
 import AuthToken from '../utils/AuthToken';
 import { loadUserAction } from "../reduxStore/actions/AuthActions";
 import store from '../../app/reduxStore/configureStore';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import ScrollToTop from '../../app/main/ScrollToTop';
 
 if (localStorage.token) {
   AuthToken(localStorage.token);
 }
 
-export default function App() {
-  const { key } = useLocation();
+const App = () => { 
 
   useEffect(() => {
     store.dispatch(loadUserAction());
-  });
+  }, []);
+
+  const { key } = useLocation();
 
   return (
-    <>
+  <Provider store={store}>
+    <BrowserRouter>       
+    <Fragment>
+    <ScrollToTop />
       <Route exact path='/' component={LandingPage} />
 
       <Route
         path={"/(.+)"} //expression which helps separate the Home page from the NavBar
         render={() => (
-          <>
+          <Fragment>
             <NavBar />
             <Container className='main'>
               <Route exact path='/posts' component={PostDashboard} />
@@ -44,10 +51,12 @@ export default function App() {
                 locationKey={key}
               />
               <Alert />              
-            </Container>
-          </>
-        )}
-      />
-    </>
-  );
-}
+            </Container>            
+          </Fragment> )}
+          />
+          </Fragment>
+          </BrowserRouter> 
+          </Provider>
+        )};
+
+export default App;
