@@ -11,8 +11,10 @@ import {
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { setAlert} from '../../app/reduxStore/actions/AlertActions';
+import { registerAction } from "../../app/reduxStore/actions/AuthActions";
 
-const Register = () => {
+const Register = ({ setAlert, registerAction }) => {
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -20,7 +22,7 @@ const Register = () => {
     password2: "",
   });
 
- const [ message, setMessage ] = useState("Enter your details");
+  const [message, setMessage] = useState("Enter your details");
 
   const { name, email, password, password2 } = values;
 
@@ -33,10 +35,10 @@ const Register = () => {
     form.preventDefault(); //validation
 
     if (password !== password2) {
-      console.log("Passwords do not match");
+      setAlert("Passwords do not match", 'show');
       setMessage("Passwords do not match");
     } else {
-      console.log(values);
+      registerAction({ name, email, password });
     }
   }
 
@@ -55,6 +57,7 @@ const Register = () => {
                 </Message>
               </Item.Content>
             </Item>
+
             <Form onSubmit={(form) => submitForm(form)} centered>
               <Form.Field>
                 <input
@@ -115,6 +118,7 @@ const Register = () => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  registerAction: PropTypes.func.isRequired
 };
 
-export default connect()(Register);
+export default connect(null, { setAlert, registerAction })(Register);

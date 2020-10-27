@@ -8,6 +8,7 @@ import PostDetails from "../../components/posts/postDetails/PostDetails";
 import LandingPage from "../../components/landing/LandingPage";
 import Login from "../../components/auth/Login";
 import Register from "../../components/auth/Register";
+import Alert from '../alert/Alert';
 
 export default function App() {
   const { key } = useLocation();
@@ -31,6 +32,7 @@ export default function App() {
                 component={PostForm}
                 locationKey={key}
               />
+              <Alert />              
             </Container>
           </>
         )}
