@@ -1,13 +1,17 @@
-import React from 'react';
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import AlertItem from './AlertItem';
+import { Message, Grid, Segment } from "semantic-ui-react";
 
 const Alert = ({ alerts }) =>
   alerts !== null &&
   alerts.length > 0 &&
   alerts.map((alert) => (
-    <AlertItem key={alert.id} message={alert.msg} />
+    <Grid centered>
+      <Segment>
+        <Message key={alert.id} warning content={alert.msg} />
+      </Segment>
+    </Grid>
   ));
 
 Alert.propTypes = {
@@ -15,7 +19,7 @@ Alert.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    alerts: state.alert,
-  });
+  alerts: state.alert,
+});
 
 export default connect(mapStateToProps)(Alert);

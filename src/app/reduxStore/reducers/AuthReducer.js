@@ -1,6 +1,8 @@
 import {
   REGISTER_SUCCESSFUL,
   REGISTER_FAILED,
+  USER_LOADED,
+  AUTH_ERR,
 } from "../actions/constants";
 
 const initialState = {
@@ -22,7 +24,9 @@ export default function AuthReducer(state = initialState, action) {
         isAuthenticated: true,
         loading: false,
       };
+
     case REGISTER_FAILED:
+    case AUTH_ERR:
       localStorage.removeItem("token");
       return {
         ...state,
@@ -30,7 +34,13 @@ export default function AuthReducer(state = initialState, action) {
         isAuthenticated: false,
         loading: false,
       };
-
+    case USER_LOADED:
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        user: payload,
+      };
     default:
       return state;
   }

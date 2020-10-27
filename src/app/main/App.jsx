@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container } from "semantic-ui-react";
 import { Route, useLocation } from "react-router-dom";
 import NavBar from "../../components/posts/nav/NavBar";
@@ -9,9 +9,20 @@ import LandingPage from "../../components/landing/LandingPage";
 import Login from "../../components/auth/Login";
 import Register from "../../components/auth/Register";
 import Alert from '../alert/Alert';
+import AuthToken from '../utils/AuthToken';
+import { loadUserAction } from "../reduxStore/actions/AuthActions";
+import store from '../../app/reduxStore/configureStore';
+
+if (localStorage.token) {
+  AuthToken(localStorage.token);
+}
 
 export default function App() {
   const { key } = useLocation();
+
+  useEffect(() => {
+    store.dispatch(loadUserAction());
+  });
 
   return (
     <>

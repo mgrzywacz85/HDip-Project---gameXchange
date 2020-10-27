@@ -22,8 +22,6 @@ const Register = ({ setAlert, registerAction }) => {
     password2: "",
   });
 
-  const [message, setMessage] = useState("Enter your details");
-
   const { name, email, password, password2 } = values;
 
   function changeInput(form) {
@@ -36,7 +34,6 @@ const Register = ({ setAlert, registerAction }) => {
 
     if (password !== password2) {
       setAlert("Passwords do not match", 'show');
-      setMessage("Passwords do not match");
     } else {
       registerAction({ name, email, password });
     }
@@ -53,7 +50,7 @@ const Register = ({ setAlert, registerAction }) => {
             <Item>
               <Item.Content>
                 <Message size='tiny' style={{ marginTop: 20, fontSize: 14 }}>
-                  {message}
+                  Enter your details
                 </Message>
               </Item.Content>
             </Item>
@@ -68,7 +65,7 @@ const Register = ({ setAlert, registerAction }) => {
                   value={name}
                   onChange={(form) => changeInput(form)}
                   style={{ marginTop: 20 }}
-                  required
+                  
                 />
               </Form.Field>
               <Form.Field>
@@ -78,7 +75,7 @@ const Register = ({ setAlert, registerAction }) => {
                   placeholder='E-mail'
                   value={email}
                   onChange={(form) => changeInput(form)}
-                  required
+                  
                 />
               </Form.Field>
               <Form.Field>
@@ -88,7 +85,7 @@ const Register = ({ setAlert, registerAction }) => {
                   placeholder='Password'
                   value={password}
                   onChange={(form) => changeInput(form)}
-                  required
+                  
                 />
               </Form.Field>
               <Form.Field>
@@ -98,7 +95,7 @@ const Register = ({ setAlert, registerAction }) => {
                   placeholder='Confirm password'
                   value={password2}
                   onChange={(form) => changeInput(form)}
-                  required
+                  
                 />
               </Form.Field>
               <Button type='submit' floated='right' content='Cancel' />

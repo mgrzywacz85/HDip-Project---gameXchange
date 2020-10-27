@@ -9,8 +9,6 @@ export default function Login() {
 
   const { email, password } = values;
 
-  const [ message ] = useState("Enter your details");
-
   function changeInput(form) {
     const { name, value } = form.target;
     setValues({ ...values, [name]: value });
@@ -33,7 +31,7 @@ export default function Login() {
             <Item>
               <Item.Content>
                 <Message size='tiny' style={{ marginTop: 20, fontSize: 14 }}>
-                  {message}
+                  Enter your details
                 </Message>
               </Item.Content>
             </Item>
