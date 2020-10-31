@@ -22,13 +22,13 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logoutAction }) => {
 
         <Menu.Item as={NavLink} exact to='/posts' name='Posts' />
 
-        {loggedIn && (
+        {loggedIn && !loading && (
           <Menu.Item as={NavLink} to='/newPost' name='New Post'>
             <Button basic color='blue' inverted content='Post Xchange' />
           </Menu.Item>
         )}
 
-        {loggedIn ? (
+        {loggedIn && !loading ? (
               <Menu.Item position='right'>
               <Dropdown pointing='top right' text='Menu'>
                     <Dropdown.Menu>
