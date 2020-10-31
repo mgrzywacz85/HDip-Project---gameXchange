@@ -1,12 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Menu, Container, Button } from "semantic-ui-react";
+import { Menu, Container, Button, Dropdown } from "semantic-ui-react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logoutAction } from "../../app/reduxStore/actions/AuthActions";
-import LoggedIn from "./loggingState/LoggedIn";
-import LoggedOut from "./loggingState/LoggedOut";
 
+import { Link } from "react-router-dom";
 
 const NavBar = ({ auth: { isAuthenticated, loading }, logoutAction }) => {
 
@@ -15,19 +14,13 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logoutAction }) => {
   return (
     <Menu inverted fixed='top'>
       <Container>
-        {loggedIn ? (
           <Menu.Item as={NavLink} exact to='/' header>
             <img src='/img/logo.png' alt='logo' style={{ marginRight: 12 }} />
             GameXchange Dublin
           </Menu.Item>
-        ) : (
-          <Menu.Item>
-            <img src='/img/logo.png' alt='logo' style={{ marginRight: 12 }} />
-            GameXchange Dublin
-          </Menu.Item>
-        )}
 
-        {loggedIn && <Menu.Item as={NavLink} exact to='/posts' name='Posts' />}
+
+        <Menu.Item as={NavLink} exact to='/posts' name='Posts' />
 
         {loggedIn && (
           <Menu.Item as={NavLink} to='/newPost' name='New Post'>
@@ -36,9 +29,27 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logoutAction }) => {
         )}
 
         {loggedIn ? (
-          <LoggedIn LogOut={logoutAction} />
+              <Menu.Item position='right'>
+              <Dropdown pointing='top right' text='Menu'>
+                    <Dropdown.Menu>
+                        <Dropdown.Item as={Link} to='/newPost' text='View Profile' />
+                        <Dropdown.Item onClick={logoutAction} text='Log out' />
+                    </Dropdown.Menu>
+              </Dropdown>
+            </Menu.Item>
         ) : (
-          <LoggedOut />
+          <Menu.Item position='right'>
+          <Button as={Link} to='/login'
+          basic 
+          inverted 
+          content='Login' />
+          <Button as={Link} to='/register'
+            basic
+            inverted
+            content='Register'
+            style={{ marginLeft: "0.5em" }}
+          />
+        </Menu.Item>
         )}
         {/* the above will check if the user is logged in */}
       </Container>
