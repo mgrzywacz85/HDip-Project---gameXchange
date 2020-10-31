@@ -1,8 +1,8 @@
 import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { Menu, Container, Button } from "semantic-ui-react";
-import LoggedOut from "../loggingState/LoggedOut";
-import LoggedIn from "../loggingState/LoggedIn";
+import LoggedOut from "../posts/loggingState/LoggedOut";
+import LoggedIn from "../posts/loggingState/LoggedIn";
 import { useState } from "react";
 
 export default function NavBar({ setFormOpen }) {

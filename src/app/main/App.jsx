@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import { Container } from "semantic-ui-react";
 import { Route } from "react-router-dom";
-import NavBar from "../../components/posts/nav/NavBar";
+import NavBar from "../../components/nav/NavBar";
 import PostDashboard from "../../components/posts/postDashboard/PostDashboard";
 import PostForm from "../../components/posts/postForm/PostForm";
 import PostDetails from "../../components/posts/postDetails/PostDetails";

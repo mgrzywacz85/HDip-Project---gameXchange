@@ -3,6 +3,7 @@ import {
   REGISTER_FAILED,
   LOGIN_SUCCESSFUL,
   LOGIN_FAILED,
+  LOG_OUT,
   USER_LOADED,
   AUTH_ERR,
 } from "../actions/constants";
@@ -30,6 +31,7 @@ export default function AuthReducer(state = initialState, action) {
 
     case REGISTER_FAILED:
     case LOGIN_FAILED:
+    case LOG_OUT:
     case AUTH_ERR:
       localStorage.removeItem("token");
       return {

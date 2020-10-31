@@ -4,5 +4,6 @@ export const REGISTER_SUCCESSFUL = "REGISTER_SUCCESSFUL";
 export const REGISTER_FAILED = "REGISTER_FAILED";
 export const LOGIN_SUCCESSFUL = "LOGIN_SUCCESSFUL";
 export const LOGIN_FAILED = "LOGIN_FAILED";
+export const LOG_OUT = "LOG_OUT";
 export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERR = "AUTH_ERR";

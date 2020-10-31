@@ -5,6 +5,7 @@ import {
   REGISTER_FAILED,
   LOGIN_SUCCESSFUL,
   LOGIN_FAILED,
+  LOG_OUT,
   USER_LOADED,
   AUTH_ERR,
 } from "./constants";
@@ -56,8 +57,7 @@ export const registerAction = ({ name, email, password }) => async (
 
     //and because the token is available, auto-load user
 
-    dispatch((loadUserAction()));
-
+    dispatch(loadUserAction());
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -75,7 +75,6 @@ export const registerAction = ({ name, email, password }) => async (
 
 export const loginAction = ({ email, password }) => async (dispatch) => {
   const config = {
-
     //first need to set up the headers
 
     headers: {
@@ -97,8 +96,7 @@ export const loginAction = ({ email, password }) => async (dispatch) => {
       payload: res.data,
     });
 
-    dispatch((loadUserAction()));
-
+    dispatch(loadUserAction());
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -110,4 +108,10 @@ export const loginAction = ({ email, password }) => async (dispatch) => {
       type: LOGIN_FAILED,
     });
   }
+};
+
+//Log out
+
+export const logoutAction = () => (dispatch) => {
+  dispatch({ type: LOG_OUT });
 };
