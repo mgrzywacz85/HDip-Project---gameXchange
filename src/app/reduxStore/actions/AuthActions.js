@@ -3,14 +3,16 @@ import { setAlert } from "./AlertActions";
 import {
   REGISTER_SUCCESSFUL,
   REGISTER_FAILED,
+  LOGIN_SUCCESSFUL,
+  LOGIN_FAILED,
   USER_LOADED,
   AUTH_ERR,
 } from "./constants";
 import AuthToken from "../../utils/AuthToken";
 
-//Load user
+//Load user via auth backend route
 
-export const loadUserAction = () => async dispatch => {
+export const loadUserAction = () => async (dispatch) => {
   if (localStorage.token) {
     AuthToken(localStorage.token);
   }
@@ -51,6 +53,11 @@ export const registerAction = ({ name, email, password }) => async (
       type: REGISTER_SUCCESSFUL,
       payload: res.data,
     });
+
+    //and because the token is available, auto-load user
+
+    dispatch((loadUserAction()));
+
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -60,6 +67,47 @@ export const registerAction = ({ name, email, password }) => async (
 
     dispatch({
       type: REGISTER_FAILED,
+    });
+  }
+};
+
+//Login user
+
+export const loginAction = ({ email, password }) => async (dispatch) => {
+  const config = {
+
+    //first need to set up the headers
+
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  //then prepare the body of the request
+
+  const body = JSON.stringify({ email, password });
+
+  try {
+    //this is where axios makes the http request
+
+    const res = await axios.post("api/auth", body, config);
+
+    dispatch({
+      type: LOGIN_SUCCESSFUL,
+      payload: res.data,
+    });
+
+    dispatch((loadUserAction()));
+
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg)));
+    }
+
+    dispatch({
+      type: LOGIN_FAILED,
     });
   }
 };

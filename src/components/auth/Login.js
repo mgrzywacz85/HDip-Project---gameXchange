@@ -1,7 +1,21 @@
 import React, { useState } from "react";
-import { Segment, Header, Form, Button, Grid, Icon, Item, Message } from "semantic-ui-react";
+import {
+  Segment,
+  Header,
+  Form,
+  Button,
+  Grid,
+  Icon,
+  Item,
+  Message,
+} from "semantic-ui-react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { setAlert } from "../../app/reduxStore/actions/AlertActions";
+import { loginAction } from "../../app/reduxStore/actions/AuthActions";
+import { Redirect } from "react-router-dom";
 
-export default function Login() {
+const Login = ({ loginAction, isAuthenticated }) => {
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -16,8 +30,13 @@ export default function Login() {
 
   function submitForm(form) {
     form.preventDefault(); //validation
+    loginAction({ email, password });
+  }
 
-    console.log('Success');
+  // Redirect to Posts Dashboard if user is authenticated
+
+  if (isAuthenticated) {
+    return <Redirect to='/posts' />;
   }
 
   return (
@@ -35,15 +54,16 @@ export default function Login() {
                 </Message>
               </Item.Content>
             </Item>
+
             <Form onSubmit={(form) => submitForm(form)} centered>
               <Form.Field>
                 <input
                   name='email'
                   type='text'
                   placeholder='E-mail'
+                  centered
                   value={email}
                   onChange={(form) => changeInput(form)}
-                  required
                   style={{ marginTop: 20 }}
                 />
               </Form.Field>
@@ -54,7 +74,6 @@ export default function Login() {
                   placeholder='Password'
                   value={password}
                   onChange={(form) => changeInput(form)}
-                  required
                 />
               </Form.Field>
               <Button type='submit' floated='right' content='Cancel' />
@@ -70,4 +89,16 @@ export default function Login() {
       </Grid.Column>
     </Grid>
   );
-}
+};
+
+Login.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  loginAction: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.AuthReducer.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, loginAction })(Login);

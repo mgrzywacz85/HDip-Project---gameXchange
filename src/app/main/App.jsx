@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from "react";
 import { Container } from "semantic-ui-react";
-import { Route, useLocation } from "react-router-dom";
+import { Route } from "react-router-dom";
 import NavBar from "../../components/posts/nav/NavBar";
 import PostDashboard from "../../components/posts/postDashboard/PostDashboard";
 import PostForm from "../../components/posts/postForm/PostForm";
@@ -24,9 +24,9 @@ const App = () => {
 
   useEffect(() => {
     store.dispatch(loadUserAction());
-  }, []);
+  }, []);  //the empty array parameter ensures the useEffect hook runs only once and is not in a loop
 
-  const { key } = useLocation();
+  //const { key } = useLocation();
 
   return (
   <Provider store={store}>
@@ -48,7 +48,7 @@ const App = () => {
               <Route
                 path={["/newPost", "/edit/:id"]}
                 component={PostForm}
-                locationKey={key}
+                //locationKey={key}
               />
               <Alert />              
             </Container>            

@@ -9,6 +9,6 @@ dispatch({
     payload: { msg, alertType, id }
 });
 
-setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id}), 4000);
+setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id}), 2000);
 
 };

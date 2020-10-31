@@ -13,8 +13,9 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { setAlert} from '../../app/reduxStore/actions/AlertActions';
 import { registerAction } from "../../app/reduxStore/actions/AuthActions";
+import { Redirect } from "react-router-dom";
 
-const Register = ({ setAlert, registerAction }) => {
+const Register = ({ setAlert, registerAction, isAuthenticated }) => {
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -37,6 +38,10 @@ const Register = ({ setAlert, registerAction }) => {
     } else {
       registerAction({ name, email, password });
     }
+  }
+
+  if (isAuthenticated) {
+    return <Redirect to='/posts' />;
   }
 
   return (
@@ -115,7 +120,12 @@ const Register = ({ setAlert, registerAction }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  registerAction: PropTypes.func.isRequired
+  registerAction: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
 };
 
-export default connect(null, { setAlert, registerAction })(Register);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.AuthReducer.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, registerAction })(Register);

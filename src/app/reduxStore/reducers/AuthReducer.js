@@ -1,6 +1,8 @@
 import {
   REGISTER_SUCCESSFUL,
   REGISTER_FAILED,
+  LOGIN_SUCCESSFUL,
+  LOGIN_FAILED,
   USER_LOADED,
   AUTH_ERR,
 } from "../actions/constants";
@@ -17,6 +19,7 @@ export default function AuthReducer(state = initialState, action) {
 
   switch (type) {
     case REGISTER_SUCCESSFUL:
+    case LOGIN_SUCCESSFUL:
       localStorage.setItem("token", payload.token);
       return {
         ...state,
@@ -26,6 +29,7 @@ export default function AuthReducer(state = initialState, action) {
       };
 
     case REGISTER_FAILED:
+    case LOGIN_FAILED:
     case AUTH_ERR:
       localStorage.removeItem("token");
       return {
