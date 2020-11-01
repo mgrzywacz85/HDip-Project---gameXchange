@@ -12,11 +12,11 @@ export default function Post({ post }) {
       <Segment>
         <Item.Group>
           <Item>
-            <Item.Image size='tiny' circular src={post.userPhotoURL} />
+            <Item.Image size='tiny' circular src={post.avatar} />
             <Item.Content>
               <Item.Header content={post.title} />
               <Item.Description>{post.date}</Item.Description>
-              <Item.Description>Posted by {post.postedBy}</Item.Description>
+              <Item.Description>Posted by {post.name}</Item.Description>
               <Item.Description>
                 <Icon name='marker' /> {post.preferredlocation}
               </Item.Description>

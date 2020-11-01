@@ -6,7 +6,7 @@ import PostDetailsChat from './PostDetailsChat';
 import { useSelector } from 'react-redux';
 
 export default function PostDetails({match}){
-    const detailedPost = useSelector(state => state.postStore.posts.find(selectedPost => selectedPost.id === match.params.id))
+    const detailedPost = useSelector(state => state.PostReducer.posts.find(selectedPost => selectedPost.id === match.params.id))
     
     return(
         <Grid centered>

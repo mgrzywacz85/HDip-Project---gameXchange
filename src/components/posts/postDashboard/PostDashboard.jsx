@@ -1,18 +1,38 @@
-import React from 'react';
-import { Grid } from 'semantic-ui-react';
-import PostList from './PostList';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { Grid } from "semantic-ui-react";
+import PostList from "./PostList";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getPosts } from "../../../app/reduxStore/actions/PostActions";
+import { useEffect } from "react";
 
-export default function PostDashboard(){
-    const {posts} = useSelector(state => state.postStore);
-    
-    //previous handler functions no longer needed after moving to Redux
+const PostDashboard = ({ getPosts }) => {
+  useEffect(() => {
+      getPosts();
+  }, [getPosts]);
 
-    return (
-        <Grid centered>
-            <Grid.Column width={10} >
-                <PostList posts={posts}/>
-            </Grid.Column>
-        </Grid>
-    )
-}
+  //previous handler functions no longer needed after moving to Redux
+
+  return (
+    <Grid centered>
+      <Grid.Column width={10}>
+        <PostList posts={(posts) => posts} />
+      </Grid.Column>
+    </Grid>
+  );
+};
+
+PostDashboard.propTypes = {
+    getPosts: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    posts: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+
+    auth: state.AuthReducer,
+    posts: state.PostReducer.posts
+
+});
+
+export default connect(mapStateToProps, { getPosts })(PostDashboard);

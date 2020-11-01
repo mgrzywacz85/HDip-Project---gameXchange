@@ -6,7 +6,7 @@ import AuthReducer from './AuthReducer';
 const rootReducer = combineReducers({
   alert,
   AuthReducer,
-  postStore: PostReducer
+  PostReducer
 });
 
 export default rootReducer;
