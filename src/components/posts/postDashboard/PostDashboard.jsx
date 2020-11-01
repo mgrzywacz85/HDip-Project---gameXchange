@@ -1,38 +1,43 @@
 import React from "react";
-import { Grid } from "semantic-ui-react";
-import PostList from "./PostList";
+import { Grid, Segment } from "semantic-ui-react";
+import Post from "./Post";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getPosts } from "../../../app/reduxStore/actions/PostActions";
 import { useEffect } from "react";
 
-const PostDashboard = ({ getPosts }) => {
+const PostDashboard = ({ getPosts, postStore: { posts } }) => {
   useEffect(() => {
-      getPosts();
+    getPosts();
   }, [getPosts]);
 
-  //previous handler functions no longer needed after moving to Redux
-
+  
   return (
     <Grid centered>
       <Grid.Column width={10}>
-        <PostList posts={(posts) => posts} />
+        {posts.map(post => (
+          <Post key={post.id} post={post} />
+        ))}
+      </Grid.Column>
+      <Grid.Column width={4}>
+            <Segment>
+                Option
+            </Segment>
+
       </Grid.Column>
     </Grid>
   );
 };
 
 PostDashboard.propTypes = {
-    getPosts: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    posts: PropTypes.object.isRequired
+  getPosts: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  postStore: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-
-    auth: state.AuthReducer,
-    posts: state.PostReducer.posts
-
+const mapStateToProps = (state) => ({
+  auth: state.AuthReducer,
+  postStore: state.PostReducer
 });
 
 export default connect(mapStateToProps, { getPosts })(PostDashboard);

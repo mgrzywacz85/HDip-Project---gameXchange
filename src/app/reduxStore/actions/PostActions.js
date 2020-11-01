@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_POSTS, POST_ERROR } from "./constants";
+import { GET_POSTS, POST_ERR } from "./constants";
 
 //GET all Posts
 
@@ -13,8 +13,8 @@ export const getPosts = () => async (dispatch) => {
     });
   } catch (err) {
     dispatch({
-      type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      type: POST_ERR,
+      payload: { msg: err.response.statusText, status: err.response.status }
     });
   }
 };

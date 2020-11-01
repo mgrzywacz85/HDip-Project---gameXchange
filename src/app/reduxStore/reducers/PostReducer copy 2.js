@@ -1,10 +1,9 @@
-import { GET_POSTS, POST_ERR } from "../actions/constants";
+import { GET_POSTS, POST_ERROR } from "../actions/constants";
 
 const initialState = {
   posts: [],
-  post: null,
   loading: true,
-  error: {}
+  error: {},
 };
 
 export default function postReducer(state = initialState, { type, payload }) {
@@ -13,13 +12,18 @@ export default function postReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         posts: payload,
-        loading: false
+        loading: false,
       };
-    case POST_ERR:
+    case POST_ERROR:
       return {
         ...state,
         error: payload,
         loading: false,
+      };
+    case "CREATE_POST":
+      return {
+        ...state,
+        posts: [...state.posts, payload],
       };
     default:
       return state;

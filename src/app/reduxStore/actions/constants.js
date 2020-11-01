@@ -8,4 +8,4 @@ export const LOG_OUT = "LOG_OUT";
 export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERR = "AUTH_ERR";
 export const GET_POSTS = "GET_POSTS";
-export const POST_ERROR = "POST_ERROR";
+export const POST_ERR = "POST_ERR";
