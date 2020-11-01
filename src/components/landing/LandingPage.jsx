@@ -32,7 +32,7 @@ export default function LandingPage({ history }) {
             inverted
             style={{ marginTop: 20 }}
           >
-            Hack
+            Posts
           </Button>
 
       </Container>

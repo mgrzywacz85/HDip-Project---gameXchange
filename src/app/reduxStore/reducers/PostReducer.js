@@ -1,4 +1,4 @@
-import { GET_POSTS, POST_ERR } from "../actions/constants";
+import { GET_POSTS, POST_ERR, CLICK_LIKE } from "../actions/constants";
 
 const initialState = {
   posts: [],
@@ -20,6 +20,13 @@ export default function postReducer(state = initialState, { type, payload }) {
         ...state,
         error: payload,
         loading: false,
+      };
+    case CLICK_LIKE:
+      return {
+        ...state,
+        posts: state.posts.map(post => post._id === payload.postId ? {...post,
+           likes: payload.likes} : post),
+           loading: false
       };
     default:
       return state;

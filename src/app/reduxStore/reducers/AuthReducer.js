@@ -39,6 +39,12 @@ export default function AuthReducer(state = initialState, action) {
         token: null,
         isAuthenticated: false,
         loading: false,
+        user: {
+          id: null,
+          name: null,
+          email: null,
+          avatar: null
+        }
       };
     case USER_LOADED:
       return {

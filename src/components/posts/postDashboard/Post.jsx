@@ -4,10 +4,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Segment, Item, Icon, Button } from "semantic-ui-react";
 import Moment from "react-moment";
+import { clickLike } from "../../../app/reduxStore/actions/PostActions";
 
-const Post = ({ auth, post }) => {
-
-
+const Post = ({ auth: { loading, user }, post, clickLike, clickUnlike }) => {
   return (
     <Segment.Group>
       <Segment>
@@ -17,7 +16,7 @@ const Post = ({ auth, post }) => {
             <Item.Content>
               <Item.Header content={post.title} />
               <Item.Description>
-                Posted by {post.name} on
+                Posted by {post.name} on{" "}
                 <Moment format='DD/MM/YYYY'>{post.date}</Moment>
               </Item.Description>
               <Item.Description>
@@ -36,41 +35,59 @@ const Post = ({ auth, post }) => {
         </Item>
       </Segment>
       <Segment secondary clearing>
+        {user._id !== null ? (
+          <Button
+            onClick={() => clickLike(post._id)}
+            color='violet'
+            content='Likes'
+            icon='heart'
+            label={{
+              basic: true,
+              color: "violet",
+              pointing: "left",
+              content: `${post.likes.length}`,
+            }}
+          />
+        ) : (
+          <Button
+            onClick={() => clickLike(post._id)}
+            color='violet'
+            content='Likes'
+            icon='heart'
+            label={{
+              basic: true,
+              color: "violet",
+              pointing: "left",
+              content: `${post.likes.length}`,
+            }}
+          />
+        )}
+
         <Button
           color='violet'
-          content='Like'
-          icon='heart'
+          content='Comments'
+          icon='comment'
           label={{
             basic: true,
             color: "violet",
             pointing: "left",
-            content: `${post.likes.length}`,
-          }}
-        />
-        <Button
-          color='violet'
-          content='Comment'
-          icon='heart'
-          label={{
-            basic: true,
-            color: "violet",
-            pointing: "left",
-            content: `${post.comments.length}`,
+            content: "2",
           }}
         />
 
-          {!auth.loading && post.user === auth.user._id && (
-        <Button
-          as={Link}
-          to={`/posts/${post.id}`} //IMPORTANT = backticks = template literals - allow to use JS to specify which post to route to
-          color='red'
-          floated='right'
-          content='Delete'
-        />)}
+        {!loading && post.user === user._id && (
+          <Button
+            as={Link}
+            to={`/posts/${post._id}`} //IMPORTANT = backticks = template literals - allow to use JS to specify which post to route to
+            color='red'
+            floated='right'
+            content='Delete'
+          />
+        )}
 
         <Button
           as={Link}
-          to={`/posts/${post.id}`} //IMPORTANT = backticks = template literals - allow to use JS to specify which post to route to
+          to={`/posts/${post._id}`} //IMPORTANT = backticks = template literals - allow to use JS to specify which post to route to
           color='violet'
           floated='right'
           content='View details'
@@ -86,7 +103,7 @@ Post.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.AuthReducer
+  auth: state.AuthReducer,
 });
 
-export default connect(mapStateToProps)(Post);
+export default connect(mapStateToProps, { clickLike })(Post);

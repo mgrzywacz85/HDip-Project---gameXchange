@@ -16,11 +16,3 @@ const store = createStore(
 export default store;
 
 //boilerplate code above to allow for thunk middleware to work with rootReducer
-
-
-// export function configureStore() {
-//     return createStore(rootReducer, composeWithDevTools())
-
-//     //can only have one Store, but many Reducers, which act as a partial Store
-//     //the rootReducer allows calling many Reducers at the same time and receiving a unified response
-// }

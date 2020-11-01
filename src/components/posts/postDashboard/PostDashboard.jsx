@@ -21,7 +21,7 @@ const PostDashboard = ({ getPosts, postStore: { posts } }) => {
       </Grid.Column>
       <Grid.Column width={4}>
             <Segment>
-                Option
+                FILTER
             </Segment>
 
       </Grid.Column>
