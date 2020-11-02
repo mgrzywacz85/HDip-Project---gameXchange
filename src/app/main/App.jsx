@@ -3,8 +3,8 @@ import { Container } from "semantic-ui-react";
 import { Route } from "react-router-dom";
 import NavBar from "../../components/nav/NavBar";
 import PostDashboard from "../../components/posts/postDashboard/PostDashboard";
-import PostForm from "../../components/posts/postForm/PostForm";
 import PostDetails from "../../components/posts/postDetails/PostDetails";
+import PostForm from "../../components/posts/postForm/PostForm";
 import LandingPage from "../../components/landing/LandingPage";
 import Login from "../../components/auth/Login";
 import Register from "../../components/auth/Register";
@@ -48,7 +48,6 @@ const App = () => {
               <Route
                 path={["/newPost", "/edit/:id"]}
                 component={PostForm}
-                //locationKey={key}
               />
               <Alert />              
             </Container>            

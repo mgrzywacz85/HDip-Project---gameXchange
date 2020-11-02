@@ -7,7 +7,7 @@ const Alert = ({ alerts }) =>
   alerts !== null &&
   alerts.length > 0 &&
   alerts.map((alert) => (
-    <Grid centered>
+    <Grid width={10} centered>
       <Segment>
         <Message key={alert.id} warning content={alert.msg} />
       </Segment>

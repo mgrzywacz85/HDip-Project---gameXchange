@@ -1,5 +1,12 @@
 import axios from "axios";
-import { CLICK_LIKE, GET_POSTS, POST_ERR } from "./constants";
+import { setAlert } from "./AlertActions";
+import {
+  GET_POSTS,
+  POST_ERR,
+  CLICK_LIKE,
+  ADD_POST,
+  DELETE_POST,
+} from "./constants";
 
 //GET all Posts
 
@@ -19,7 +26,37 @@ export const getPosts = () => async (dispatch) => {
   }
 };
 
-//Like Post
+//Add Post
+
+export const addPost = ({ category, title, description, preferredlocation, photo }) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const body = JSON.stringify({ category, title, description, preferredlocation, photo });
+
+  try {
+    const res = await axios.post("/api/posts/", body, config);
+
+    dispatch({
+      type: ADD_POST,
+      payload: res.data,
+    });
+
+    dispatch(setAlert("Post added"));
+  } catch (err) {
+
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg)));
+    }
+  }
+};
+
+//Like or Unlike Post
 
 export const clickLike = (postId) => async (dispatch) => {
   try {
@@ -43,5 +80,25 @@ export const clickLike = (postId) => async (dispatch) => {
         payload: { msg: err.response.statusText, status: err.response.status },
       });
     }
+  }
+};
+
+// Delete Post
+
+export const deletePost = (postId) => async (dispatch) => {
+  try {
+    await axios.delete(`/api/posts/${postId}`);
+
+    dispatch({
+      type: DELETE_POST,
+      payload: postId,
+    });
+
+    dispatch(setAlert("Post deleted"));
+  } catch (err) {
+    dispatch({
+      type: POST_ERR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
   }
 };

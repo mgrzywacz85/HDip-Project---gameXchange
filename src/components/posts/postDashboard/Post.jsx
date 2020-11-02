@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Segment, Item, Icon, Button } from "semantic-ui-react";
 import Moment from "react-moment";
-import { clickLike } from "../../../app/reduxStore/actions/PostActions";
+import { clickLike, deletePost } from "../../../app/reduxStore/actions/PostActions";
 
-const Post = ({ auth: { loading, user }, post, clickLike, clickUnlike }) => {
+const Post = ({ auth: { loading, user }, post, clickLike, deletePost }) => {
   return (
     <Segment.Group>
       <Segment>
@@ -77,8 +77,7 @@ const Post = ({ auth: { loading, user }, post, clickLike, clickUnlike }) => {
 
         {!loading && post.user === user._id && (
           <Button
-            as={Link}
-            to={`/posts/${post._id}`} //IMPORTANT = backticks = template literals - allow to use JS to specify which post to route to
+            onClick={() => deletePost(post._id)}
             color='red'
             floated='right'
             content='Delete'
@@ -100,10 +99,12 @@ const Post = ({ auth: { loading, user }, post, clickLike, clickUnlike }) => {
 Post.propTypes = {
   post: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
+  clickLike: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   auth: state.AuthReducer,
 });
 
-export default connect(mapStateToProps, { clickLike })(Post);
+export default connect(mapStateToProps, { clickLike, deletePost })(Post);

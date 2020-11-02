@@ -1,66 +1,99 @@
-import cuid from "cuid";
 import React, { useState } from "react";
-import { Segment, Header, Form, Button, Grid } from "semantic-ui-react";
-import { useDispatch, useSelector} from 'react-redux';
-import {updatePost, createPost} from '../postRedux/PostActions';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { addPost } from "../../../app/reduxStore/actions/PostActions";
+import {
+  Grid,
+  Segment,
+  Header,
+  Form,
+  Button,
+  Dropdown,
+} from "semantic-ui-react";
+import { setAlert } from "../../../app/reduxStore/actions/AlertActions";
 
-export default function PostForm({ match, history }) {
-  const dispatch = useDispatch();
+const PostForm = ({ addPost }) => {
+  const categoryOptions = [
+    {
+      key: "Playstation 4",
+      text: "Playstation 4",
+      value: "Playstation 4",
+    },
+    {
+      key: "Nintendo Switch",
+      text: "Nintendo Switch",
+      value: "Nintendo Switch",
+    },
+    {
+      key: "Xbox One",
+      text: "Xbox One",
+      value: "Xbox One",
+    },
+    {
+      key: "Playstation 3",
+      text: "Playstation 3",
+      value: "Playstation 3",
+    },
+    {
+      key: "Xbox 360",
+      text: "Xbox 360",
+      value: "Xbox 360",
+    },
+    {
+      key: "Nintendo 3DS",
+      text: "Nintendo 3DS",
+      value: "Nintendo 3DS",
+    },
+  ];
 
-  const selectedPost = useSelector(state => state.postStore.posts.find(post => post.id === match.params.id))
-
-  const initialValues = selectedPost ?? {
+  const [values, setValues] = useState({
+    category: "",
     title: "",
     description: "",
     preferredlocation: "",
-  };
+    photo: "",
+  });
 
-  const [values, setValues] = useState(initialValues);
+  const { category, title, description, preferredlocation, photo } = values;
 
-  function submitNewPost() {
-    var today = new Date();
-    var currentDate =
-      today.getFullYear() +
-      "-" +
-      (today.getMonth() + 1) +
-      "-" +
-      today.getDate();
-
-    selectedPost
-      ? dispatch(updatePost({ ...selectedPost, ...values }))
-      : dispatch(createPost({
-          ...values,
-          id: cuid(),
-          userPhotoURL: "././img/user.png",
-          date: currentDate,
-          postedBy: "User",
-          responders: [],
-        }));
-        history.push('/posts');
-  }
-
-  function changeInput(post) {
-    const { name, value } = post.target;
+  function changeInput(form) {
+    const { name, value } = form.target;
     setValues({ ...values, [name]: value });
   }
 
+  const dropdownChange = (form, data) => {
+    this.setState({ [data.name]: data.value });
+  }
+
+  function submitForm(form) {
+    form.preventDefault(); //validation
+    addPost({ category, title, description, preferredlocation, photo });
+  }
+
   return (
+
     //Adding the clearing property helps align the buttons under the fields correctly
     <Grid centered>
       <Grid.Column width={10}>
         <Segment clearing>
-          <Header
-            size='large'
-            content={selectedPost ? "Edit Xchange" : "Create Xchange"}
-          />
-          <Form onSubmit={submitNewPost}>
+          <Header size='large' content='Create Xchange' />
+          <Form onSubmit={(form) => submitForm(form)} centered>
+            <Dropdown
+              name='category'
+              placeholder='Select category'
+              selection
+              fluid
+              options={categoryOptions}
+              onChange={dropdownChange}
+            />
             <Form.Field>
               <input
                 name='title'
                 type='text'
-                placeholder='Xchange Title'
-                value={values.title}
-                onChange={(post) => changeInput(post)}
+                placeholder='Title'
+                value={title}
+                onChange={(form) => changeInput(form)}
+                style={{ marginTop: 14 }}
               />
             </Form.Field>
             <Form.Field>
@@ -68,24 +101,29 @@ export default function PostForm({ match, history }) {
                 name='description'
                 type='text'
                 placeholder='Description'
-                value={values.description}
-                onChange={(post) => changeInput(post)}
+                value={description}
+                onChange={(form) => changeInput(form)}
               />
             </Form.Field>
             <Form.Field>
               <input
                 name='preferredlocation'
                 type='text'
-                placeholder='Preferred Location'
-                value={values.preferredlocation}
-                onChange={(post) => changeInput(post)}
+                placeholder='Preferred location for meet-up'
+                value={preferredlocation}
+                onChange={(form) => changeInput(form)}
               />
             </Form.Field>
-            <Button              
-              type='submit'
-              floated='right'
-              content='Cancel'
-            />
+            <Form.Field>
+              <input
+                name='photo'
+                type='text'
+                placeholder='Link to item photo'
+                value={photo}
+                onChange={(form) => changeInput(form)}
+              />
+            </Form.Field>
+            <Button type='submit' floated='right' content='Cancel' />
             <Button
               type='submit'
               floated='right'
@@ -97,4 +135,15 @@ export default function PostForm({ match, history }) {
       </Grid.Column>
     </Grid>
   );
-}
+};
+
+PostForm.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  addPost: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.AuthReducer.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, addPost })(PostForm);

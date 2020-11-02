@@ -11,7 +11,7 @@ import {
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { setAlert} from '../../app/reduxStore/actions/AlertActions';
+import { setAlert} from "../../app/reduxStore/actions/AlertActions";
 import { registerAction } from "../../app/reduxStore/actions/AuthActions";
 import { Redirect } from "react-router-dom";
 
