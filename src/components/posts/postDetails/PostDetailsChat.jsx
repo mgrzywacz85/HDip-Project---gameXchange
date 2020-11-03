@@ -74,7 +74,7 @@ export default function PostDetailsTitle(){
     
         <Form reply>
           <Form.TextArea />
-          <Button content='Add Reply' labelPosition='left' icon='edit' primary />
+          <Button content='Add Reply' labelPosition='left' icon='edit' color='violet' primary />
         </Form>
       </Comment.Group>
       </Segment>

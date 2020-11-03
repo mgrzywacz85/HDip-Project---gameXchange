@@ -4,9 +4,17 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Segment, Item, Icon, Button } from "semantic-ui-react";
 import Moment from "react-moment";
-import { clickLike, deletePost } from "../../../app/reduxStore/actions/PostActions";
+import {
+  clickLike,
+  deletePost,
+} from "../../../app/reduxStore/actions/PostActions";
 
-const Post = ({ auth: { loading, user }, post, clickLike, deletePost }) => {
+const Post = ({
+  auth: { loading, user },
+  post,
+  clickLike,
+  deletePost,
+}) => {
   return (
     <Segment.Group>
       <Segment>
@@ -15,12 +23,13 @@ const Post = ({ auth: { loading, user }, post, clickLike, deletePost }) => {
             <Item.Image size='tiny' circular src={post.avatar} />
             <Item.Content>
               <Item.Header content={post.title} />
+              <Item.Description>Category: {post.category}</Item.Description>
               <Item.Description>
-                Posted by {post.name} on{" "}
-                <Moment format='DD/MM/YYYY'>{post.date}</Moment>
+                Posted by {post.name} on <Moment format='DD/MM/YYYY'>{post.date}</Moment>
               </Item.Description>
               <Item.Description>
-                <Icon name='marker' /> {post.preferredlocation}
+                Meet-up location: <Icon name='marker' />
+                {post.preferredlocation}
               </Item.Description>
             </Item.Content>
           </Item>
@@ -35,33 +44,18 @@ const Post = ({ auth: { loading, user }, post, clickLike, deletePost }) => {
         </Item>
       </Segment>
       <Segment secondary clearing>
-        {user._id !== null ? (
-          <Button
-            onClick={() => clickLike(post._id)}
-            color='violet'
-            content='Likes'
-            icon='heart'
-            label={{
-              basic: true,
-              color: "violet",
-              pointing: "left",
-              content: `${post.likes.length}`,
-            }}
-          />
-        ) : (
-          <Button
-            onClick={() => clickLike(post._id)}
-            color='violet'
-            content='Likes'
-            icon='heart'
-            label={{
-              basic: true,
-              color: "violet",
-              pointing: "left",
-              content: `${post.likes.length}`,
-            }}
-          />
-        )}
+        <Button
+          onClick={() => clickLike(post._id)}
+          color='violet'
+          content='Likes'
+          icon='heart'
+          label={{
+            basic: true,
+            color: "violet",
+            pointing: "left",
+            content: `${post.likes.length}`,
+          }}
+        />
 
         <Button
           color='violet'
@@ -100,11 +94,11 @@ Post.propTypes = {
   post: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   clickLike: PropTypes.func.isRequired,
-  deletePost: PropTypes.func.isRequired
+  deletePost: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.AuthReducer,
+  auth: state.AuthReducer
 });
 
 export default connect(mapStateToProps, { clickLike, deletePost })(Post);

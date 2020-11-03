@@ -8,9 +8,9 @@ import {
   LOG_OUT,
   USER_LOADED,
   AUTH_ERR,
+  POST_ERR,
 } from "./constants";
 import AuthToken from "../../utils/AuthToken";
-
 //Load user via auth backend route
 
 export const loadUserAction = () => async (dispatch) => {
@@ -114,4 +114,5 @@ export const loginAction = ({ email, password }) => async (dispatch) => {
 
 export const logoutAction = () => (dispatch) => {
   dispatch({ type: LOG_OUT });
+  dispatch({ type: POST_ERR });
 };

@@ -21,8 +21,3 @@ body {
   background-image: linear-gradient(138deg, #260227 0%, rgba(18,38,69,1) 20%, #5d54a4 91%)
   !important ;
 }
-
-.alert-redalert {
-  background: var(--redalert-color);
-  color: #ffffff;
-}

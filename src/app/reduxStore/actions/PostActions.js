@@ -6,6 +6,7 @@ import {
   CLICK_LIKE,
   ADD_POST,
   DELETE_POST,
+  GET_SELECTED_POST,
 } from "./constants";
 
 //GET all Posts
@@ -16,6 +17,24 @@ export const getPosts = () => async (dispatch) => {
 
     dispatch({
       type: GET_POSTS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//GET selected Post
+
+export const getSelectedPost = _id => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/posts/${_id}`);
+
+    dispatch({
+      type: GET_SELECTED_POST,
       payload: res.data,
     });
   } catch (err) {

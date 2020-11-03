@@ -1,4 +1,5 @@
-import { GET_POSTS, POST_ERR, ADD_POST, DELETE_POST, CLICK_LIKE } from "../actions/constants";
+
+import { GET_POSTS, GET_SELECTED_POST, POST_ERR, ADD_POST, DELETE_POST, CLICK_LIKE } from "../actions/constants";
 
 const initialState = {
   posts: [],
@@ -15,6 +16,12 @@ export default function postReducer(state = initialState, { type, payload }) {
         posts: payload,
         loading: false
       };
+    case GET_SELECTED_POST:
+      return {
+        ...state,
+        post: payload,
+        loading: false
+      }
     case POST_ERR:
       return {
         ...state,

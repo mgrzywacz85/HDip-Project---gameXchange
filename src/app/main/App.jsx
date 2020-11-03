@@ -42,7 +42,7 @@ const App = () => {
             <NavBar />
             <Container className='main'>
               <Route exact path='/posts' component={PostDashboard} />
-              <Route path='/posts/:id' component={PostDetails} />
+              <Route exact path='/posts/:id' component={PostDetails} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
               <Route

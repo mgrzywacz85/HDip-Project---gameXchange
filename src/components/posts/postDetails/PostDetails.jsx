@@ -1,21 +1,30 @@
-import React from 'react';
-import { Grid } from 'semantic-ui-react';
-import PostDetailsTitle from './PostDetailsTitle';
-import PostDetailsMain from './PostDetailsMain';
-import PostDetailsChat from './PostDetailsChat';
-import { useSelector } from 'react-redux';
+import React, { Fragment, useEffect } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getSelectedPost } from "../../../app/reduxStore/actions/PostActions";
+import { Loader } from 'semantic-ui-react';
+import PostDetailsItem from "./PostDetailsItem";
 
-export default function PostDetails({match}){
-    const detailedPost = useSelector(state => state.PostReducer.posts.find(selectedPost => selectedPost.id === match.params.id))
+const PostDetails = ({ getSelectedPost, post: { post, loading }, match }) => {
+  useEffect(() => {
+    getSelectedPost(match.params.id);
+  },[getSelectedPost, match.params.id]);
     
-    return(
-        <Grid centered>
-            <Grid.Column width={10} >
-                <PostDetailsTitle detailedPost={detailedPost} />
-                <PostDetailsMain detailedPost={detailedPost} />
-                <PostDetailsChat />
-            </Grid.Column>
-        </Grid>
-    )
 
-}
+  return loading || post === null ? <Loader /> : 
+  
+    <Fragment>
+        <PostDetailsItem post={post} />
+  </Fragment>
+};
+
+PostDetails.propTypes = {
+  getSelectedPost: PropTypes.func.isRequired,
+  post: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  post: state.PostReducer,
+});
+
+export default connect(mapStateToProps, { getSelectedPost })(PostDetails);

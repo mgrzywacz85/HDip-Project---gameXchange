@@ -19,11 +19,12 @@ const PostDashboard = ({ getPosts, postStore: { posts } }) => {
           <Post key={post.id} post={post} />
         ))}
       </Grid.Column>
-      <Grid.Column width={4}>
-            <Segment>
-                FILTER
-            </Segment>
-
+      <Grid.Column width={3} >
+      <Segment.Group textAlign='center'>
+      <Segment attached='top' textAlign='center' color='grey' >
+        <h4>FILTER</h4>
+      </Segment>
+    </Segment.Group>
       </Grid.Column>
     </Grid>
   );

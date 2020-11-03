@@ -65,7 +65,7 @@ const Register = ({ setAlert, registerAction, isAuthenticated }) => {
                 <input
                   name='name'
                   type='text'
-                  placeholder='First and Last name'
+                  placeholder='Username'
                   centered
                   value={name}
                   onChange={(form) => changeInput(form)}

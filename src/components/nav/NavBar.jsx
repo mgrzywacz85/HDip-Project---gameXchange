@@ -11,6 +11,11 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logoutAction }) => {
 
   const loggedIn = isAuthenticated;
 
+  function logOutNow(){
+    logoutAction();
+    window.location.reload();
+  }
+
   return (
     <Menu inverted fixed='top'>
       <Container>
@@ -32,8 +37,8 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logoutAction }) => {
               <Menu.Item position='right'>
               <Dropdown pointing='top right' text='Menu'>
                     <Dropdown.Menu>
-                        <Dropdown.Item as={Link} to='/newPost' text='View Profile' />
-                        <Dropdown.Item onClick={logoutAction} text='Log out' />
+                        <Dropdown.Item as={Link} to='/newPost' text='Create Xchange' />
+                        <Dropdown.Item onClick={logOutNow} text='Log out' />
                     </Dropdown.Menu>
               </Dropdown>
             </Menu.Item>

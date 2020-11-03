@@ -8,43 +8,11 @@ import {
   Header,
   Form,
   Button,
-  Dropdown,
 } from "semantic-ui-react";
 import { setAlert } from "../../../app/reduxStore/actions/AlertActions";
+import { Redirect} from 'react-router-dom';
 
 const PostForm = ({ addPost }) => {
-  const categoryOptions = [
-    {
-      key: "Playstation 4",
-      text: "Playstation 4",
-      value: "Playstation 4",
-    },
-    {
-      key: "Nintendo Switch",
-      text: "Nintendo Switch",
-      value: "Nintendo Switch",
-    },
-    {
-      key: "Xbox One",
-      text: "Xbox One",
-      value: "Xbox One",
-    },
-    {
-      key: "Playstation 3",
-      text: "Playstation 3",
-      value: "Playstation 3",
-    },
-    {
-      key: "Xbox 360",
-      text: "Xbox 360",
-      value: "Xbox 360",
-    },
-    {
-      key: "Nintendo 3DS",
-      text: "Nintendo 3DS",
-      value: "Nintendo 3DS",
-    },
-  ];
 
   const [values, setValues] = useState({
     category: "",
@@ -61,13 +29,10 @@ const PostForm = ({ addPost }) => {
     setValues({ ...values, [name]: value });
   }
 
-  const dropdownChange = (form, data) => {
-    this.setState({ [data.name]: data.value });
-  }
-
   function submitForm(form) {
     form.preventDefault(); //validation
     addPost({ category, title, description, preferredlocation, photo });
+    return <Redirect to='/' />;
   }
 
   return (
@@ -78,14 +43,15 @@ const PostForm = ({ addPost }) => {
         <Segment clearing>
           <Header size='large' content='Create Xchange' />
           <Form onSubmit={(form) => submitForm(form)} centered>
-            <Dropdown
-              name='category'
-              placeholder='Select category'
-              selection
-              fluid
-              options={categoryOptions}
-              onChange={dropdownChange}
-            />
+          <Form.Field>
+              <input
+                name='category'
+                type='text'
+                placeholder='Category'
+                value={category}
+                onChange={(form) => changeInput(form)}
+              />
+            </Form.Field>
             <Form.Field>
               <input
                 name='title'
@@ -93,7 +59,6 @@ const PostForm = ({ addPost }) => {
                 placeholder='Title'
                 value={title}
                 onChange={(form) => changeInput(form)}
-                style={{ marginTop: 14 }}
               />
             </Form.Field>
             <Form.Field>
@@ -123,12 +88,12 @@ const PostForm = ({ addPost }) => {
                 onChange={(form) => changeInput(form)}
               />
             </Form.Field>
-            <Button type='submit' floated='right' content='Cancel' />
+            <Button type='submit' floated='right' color='red' content='Cancel' />
             <Button
               type='submit'
               floated='right'
               content='Submit'
-              color='blue'
+              color='violet'
             />
           </Form>
         </Segment>
