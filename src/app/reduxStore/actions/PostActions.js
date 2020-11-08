@@ -77,7 +77,6 @@ export const addPost = ({
       type: ADD_POST,
       payload: res.data,
     });
-
     dispatch(setAlert("Post added"));
   } catch (err) {
     const errors = err.response.data.errors;

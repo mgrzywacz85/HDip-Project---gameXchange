@@ -1,7 +1,8 @@
 import React from "react";
 import { Segment, Container, Header, Button, Icon } from "semantic-ui-react";
+import { connect } from 'react-redux';
 
-export default function LandingPage({ history }) {
+const LandingPage = ({ auth, history }) => {
   return (
     <Segment className='homepage' inverted vertical textAlign='center'>
       <Container>
@@ -11,6 +12,8 @@ export default function LandingPage({ history }) {
         <Header inverted as='h1' style={{ fontSize: 60 }}>
           GameXchange Dublin
         </Header>
+        
+        {!auth.loading && !auth.isAuthenticated &&
         <Button
           onClick={() => history.push("/login")}
           size='big'
@@ -18,8 +21,9 @@ export default function LandingPage({ history }) {
           style={{ marginTop: 20 }}
         >
           Login
-        </Button>
+        </Button>}
 
+        {!auth.loading && !auth.isAuthenticated &&
         <Button
           onClick={() => history.push("/register")}
           size='big'
@@ -27,7 +31,7 @@ export default function LandingPage({ history }) {
           style={{ marginTop: 10, marginLeft: 10 }}
         >
           Register
-        </Button>
+        </Button>}
 
         <Header inverted as='h3' style={{ fontSize: 20 }}>
          
@@ -46,3 +50,9 @@ export default function LandingPage({ history }) {
     </Segment>
   );
 }
+
+const mapStateToProps = (state) => ({
+  auth: state.AuthReducer,
+});
+
+export default connect(mapStateToProps, { })(LandingPage);
