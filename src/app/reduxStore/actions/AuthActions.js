@@ -11,6 +11,7 @@ import {
   POST_ERR,
 } from "./constants";
 import AuthToken from "../../utils/AuthToken";
+
 //Load user via auth backend route
 
 export const loadUserAction = () => async (dispatch) => {

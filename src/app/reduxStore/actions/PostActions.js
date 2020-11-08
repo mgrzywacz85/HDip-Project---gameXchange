@@ -9,6 +9,7 @@ import {
   GET_SELECTED_POST,
   ADD_COMMENT,
   DELETE_COMMENT,
+  ACCEPT_XCHANGE
 } from "./constants";
 
 //GET all Posts
@@ -146,12 +147,11 @@ export const addCommentToPost = (postID, values) => async (dispatch) => {
 
 //Delete Comment from Post
 
-export const deleteCommentFromPost = (postID, commentID) => async (dispatch) => {
-
+export const deleteCommentFromPost = (postID, commentID) => async (
+  dispatch
+) => {
   try {
-    
-    await axios.delete(
-      `/api/posts/comment/${postID}/${commentID}`);
+    await axios.delete(`/api/posts/comment/${postID}/${commentID}`);
 
     dispatch({
       type: DELETE_COMMENT,
@@ -179,6 +179,26 @@ export const deletePost = (postId) => async (dispatch) => {
     });
 
     dispatch(setAlert("Post deleted"));
+  } catch (err) {
+    dispatch({
+      type: POST_ERR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+export const acceptXchange = (postID, commentID) => async (
+  dispatch
+) => {
+  try {
+    await axios.put(`/api/posts/comment/${postID}/${commentID}`);
+
+    dispatch({
+      type: ACCEPT_XCHANGE,
+      payload: commentID,
+    });
+
+    dispatch(setAlert("Comment deleted"));
   } catch (err) {
     dispatch({
       type: POST_ERR,

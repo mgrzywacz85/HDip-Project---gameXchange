@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Loader, Comment, Button, Segment } from "semantic-ui-react";
 import Moment from "react-moment";
-import { deleteCommentFromPost } from "../../../app/reduxStore/actions/PostActions";
+import { acceptXchange, deleteCommentFromPost } from "../../../app/reduxStore/actions/PostActions";
 
 const PostComment = ({
   deleteCommentFromPost,
@@ -29,6 +29,7 @@ const PostComment = ({
           {!auth.loading && auth.user._id === postUser && comment.user !== auth.user._id && (
             <Button.Group floated='right'>
               <Button
+                onClick={() => acceptXchange(postID, comment._id)}
                 color='purple'
                 content='Accept Xchange'
                 style={{ right: 0 }}
@@ -39,7 +40,7 @@ const PostComment = ({
           {!auth.loading && comment.user === auth.user._id && (
                           <Button.Group floated='right'>
                           <Button
-                          onClick={e => deleteCommentFromPost(postID, comment._id)}
+                          onClick={() => deleteCommentFromPost(postID, comment._id)}
                           inverted
                             color='red'
                             content='Delete comment'
@@ -60,10 +61,11 @@ PostComment.propTypes = {
   comment: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   deleteCommentFromPost: PropTypes.func.isRequired,
+  acceptXchange: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   auth: state.AuthReducer,
 });
 
-export default connect(mapStateToProps, { deleteCommentFromPost })(PostComment);
+export default connect(mapStateToProps, { deleteCommentFromPost, acceptXchange })(PostComment);

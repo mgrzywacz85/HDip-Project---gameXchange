@@ -10,14 +10,13 @@ import {
   Button,
 } from "semantic-ui-react";
 import { setAlert } from "../../../app/reduxStore/actions/AlertActions";
-import { Redirect} from 'react-router-dom';
 
-const PostForm = ({ addPost }) => {
+const PostForm = ({ addPost, history }) => {
 
   const[cat,setCat] = useState("Playstation 4");
 
   const [values, setValues] = useState({
-    category: "",
+    category: "Playstation 4",
     title: "",
     description: "",
     preferredlocation: "",
@@ -44,7 +43,8 @@ const PostForm = ({ addPost }) => {
   function submitForm(form) {
     form.preventDefault(); //validation
     addPost({ category, title, description, preferredlocation, photo });
-    return <Redirect to='/' />;
+    history.push('/posts/');
+    window.location.reload();
   }
 
   return (
@@ -55,11 +55,11 @@ const PostForm = ({ addPost }) => {
         <Segment clearing>
           <Header size='large' content='Create Xchange' />
           <Segment clearing >
-            <Button onClick={() => setCatValue("Playstation 4")} color='purple' content='Playstation 4'></Button>
-            <Button onClick={() => setCatValue("Nintendo Switch")} color='purple'  content='Nintendo Switch'></Button>
-            <Button onClick={() => setCatValue("Xbox One")} color='purple' content='Xbox One'></Button>
-            <Button onClick={() => setCatValue("Playstation 5")} color='purple' content='Playstation 5'></Button>
-            <Button onClick={() => setCatValue("Xbox Series")} color='purple' content='Xbox Series'></Button>
+            <Button onClick={() => setCatValue("Playstation 4")} color='blue' content='Playstation 4'></Button>
+            <Button onClick={() => setCatValue("Nintendo Switch")} color='red'  content='Nintendo Switch'></Button>
+            <Button onClick={() => setCatValue("Xbox One")} color='green' content='Xbox One'></Button>
+            <Button onClick={() => setCatValue("Playstation 5")} color='blue' content='Playstation 5'></Button>
+            <Button onClick={() => setCatValue("Xbox Series")} color='green' content='Xbox Series'></Button>
           </Segment>
           <Form onSubmit={(form) => submitForm(form)} centered>
           <Form.Field>

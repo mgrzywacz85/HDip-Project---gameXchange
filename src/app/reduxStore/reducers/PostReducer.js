@@ -7,6 +7,7 @@ import {
   DELETE_COMMENT,
   DELETE_POST,
   CLICK_LIKE,
+  ACCEPT_XCHANGE
 } from "../actions/constants";
 
 const initialState = {
@@ -62,15 +63,21 @@ export default function postReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         post: { ...state.post, comments: payload },
-        loading: false
+        loading: false,
       };
     case DELETE_COMMENT:
       return {
         ...state,
-        post: { ...state.post,
-        comments: state.post.comments.filter(comment => comment._id !== payload)},
-        loading: false
+        post: {
+          ...state.post,
+          comments: state.post.comments.filter(
+            (comment) => comment._id !== payload
+          ),
+        },
+        loading: false,
       };
+    case ACCEPT_XCHANGE:
+      return { ...state, post: { ...state.post, loading: false } };
     default:
       return state;
   }
