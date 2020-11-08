@@ -1,10 +1,12 @@
 import React from "react";
-import { Grid, Segment, Item } from "semantic-ui-react";
-import PostDetailsChat from "./PostDetailsChat";
+import { Grid, Segment, Item, Comment, Header } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-const PostDetailsItem = ({ post, auth } ) => {
+import PostCommentForm from "./PostCommentForm";
+import PostComment from './PostComment';
+
+const PostDetailsItem = ({ post: {_id, title, description, photo, comments, user }, auth } ) => {
 
   return (    
 
@@ -12,16 +14,16 @@ const PostDetailsItem = ({ post, auth } ) => {
       <Grid.Column width={10}>
         <Segment.Group>
           <Segment attached='top'>
-            <h1>{post.title}</h1>
+            <h1>{title}</h1>
           </Segment>
         </Segment.Group>
 
         <Segment.Group>
           <Segment attached='top'>
-            <h3>{post.description}</h3>
+            <h3>{description}</h3>
             <p />
             <Item>
-              <Item.Image size='large' src={post.photo} />
+              <Item.Image size='large' src={photo} />
             </Item>
           </Segment>
 
@@ -29,7 +31,18 @@ const PostDetailsItem = ({ post, auth } ) => {
           </Segment>
         </Segment.Group>
 
-        <PostDetailsChat />
+        <Segment>
+    <Comment.Group>
+    <Header as='h2' dividing>
+      Comments
+    </Header>
+        {comments.map(comment => (
+          <PostComment key={comment._id} comment={comment} postID={_id} postUser={user} />
+        ))}
+            </Comment.Group>
+      </Segment>
+
+        <PostCommentForm postID={_id}/>
       </Grid.Column>
     </Grid> 
 );

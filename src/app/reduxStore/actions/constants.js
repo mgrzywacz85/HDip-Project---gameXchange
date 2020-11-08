@@ -13,3 +13,6 @@ export const POST_ERR = "POST_ERR";
 export const ADD_POST = "ADD_POST";
 export const DELETE_POST = "DELETE_POST";
 export const CLICK_LIKE = "CLICK_LIKE";
+export const ADD_COMMENT = "ADD_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
+

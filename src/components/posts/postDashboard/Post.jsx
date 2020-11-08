@@ -9,12 +9,7 @@ import {
   deletePost,
 } from "../../../app/reduxStore/actions/PostActions";
 
-const Post = ({
-  auth: { loading, user },
-  post,
-  clickLike,
-  deletePost,
-}) => {
+const Post = ({ auth: { loading, user }, post, clickLike, deletePost }) => {
   return (
     <Segment.Group>
       <Segment>
@@ -25,7 +20,8 @@ const Post = ({
               <Item.Header content={post.title} />
               <Item.Description>Category: {post.category}</Item.Description>
               <Item.Description>
-                Posted by {post.name} on <Moment format='DD/MM/YYYY'>{post.date}</Moment>
+                Posted by {post.name} on{" "}
+                <Moment format='DD/MM/YYYY'>{post.date}</Moment>
               </Item.Description>
               <Item.Description>
                 Meet-up location: <Icon name='marker' />
@@ -58,14 +54,16 @@ const Post = ({
         />
 
         <Button
-          color='violet'
+          as={Link}
+          to={`/posts/${post._id}`}
+          color='purple'
           content='Comments'
           icon='comment'
           label={{
             basic: true,
-            color: "violet",
+            color: "purple",
             pointing: "left",
-            content: "2",
+            content: `${post.comments.length}`,
           }}
         />
 
@@ -98,7 +96,7 @@ Post.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.AuthReducer
+  auth: state.AuthReducer,
 });
 
 export default connect(mapStateToProps, { clickLike, deletePost })(Post);
