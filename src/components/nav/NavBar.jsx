@@ -29,7 +29,7 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logoutAction }) => {
 
         {loggedIn && !loading && (
           <Menu.Item as={NavLink} to='/newPost' name='New Post'>
-            <Button basic color='blue' inverted content='Post Xchange' />
+            <Button basic color='blue' inverted content='Create Xchange' />
           </Menu.Item>
         )}
 

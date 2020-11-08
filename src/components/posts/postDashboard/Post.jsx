@@ -69,7 +69,7 @@ const Post = ({ auth: { loading, user }, post, clickLike, deletePost }) => {
 
         {!loading && post.user === user._id && (
           <Button
-            onClick={() => deletePost(post._id)}
+            onClick={() => {if(window.confirm('Are you sure you want to delete this post?')){deletePost(post._id)}}}
             color='red'
             floated='right'
             content='Delete'

@@ -14,12 +14,14 @@ import { Redirect} from 'react-router-dom';
 
 const PostForm = ({ addPost }) => {
 
+  const[cat,setCat] = useState("Playstation 4");
+
   const [values, setValues] = useState({
     category: "",
     title: "",
     description: "",
     preferredlocation: "",
-    photo: "",
+    photo: ""
   });
 
   const { category, title, description, preferredlocation, photo } = values;
@@ -27,6 +29,16 @@ const PostForm = ({ addPost }) => {
   function changeInput(form) {
     const { name, value } = form.target;
     setValues({ ...values, [name]: value });
+  }
+
+  function changeCat(cat) {
+    const { value } = cat.target;
+    setValues({ ...values, category: value });
+  }
+
+  function setCatValue(cat){
+    setCat(cat);
+    setValues({...values, category: cat});
   }
 
   function submitForm(form) {
@@ -42,14 +54,21 @@ const PostForm = ({ addPost }) => {
       <Grid.Column width={10}>
         <Segment clearing>
           <Header size='large' content='Create Xchange' />
+          <Segment clearing >
+            <Button onClick={() => setCatValue("Playstation 4")} color='purple' content='Playstation 4'></Button>
+            <Button onClick={() => setCatValue("Nintendo Switch")} color='purple'  content='Nintendo Switch'></Button>
+            <Button onClick={() => setCatValue("Xbox One")} color='purple' content='Xbox One'></Button>
+            <Button onClick={() => setCatValue("Playstation 5")} color='purple' content='Playstation 5'></Button>
+            <Button onClick={() => setCatValue("Xbox Series")} color='purple' content='Xbox Series'></Button>
+          </Segment>
           <Form onSubmit={(form) => submitForm(form)} centered>
           <Form.Field>
               <input
                 name='category'
                 type='text'
                 placeholder='Category'
-                value={category}
-                onChange={(form) => changeInput(form)}
+                value={cat}
+                onChange={(e) => changeCat(e)}
               />
             </Form.Field>
             <Form.Field>
@@ -83,7 +102,7 @@ const PostForm = ({ addPost }) => {
               <input
                 name='photo'
                 type='text'
-                placeholder='Link to item photo'
+                placeholder='External link to item photo'
                 value={photo}
                 onChange={(form) => changeInput(form)}
               />
