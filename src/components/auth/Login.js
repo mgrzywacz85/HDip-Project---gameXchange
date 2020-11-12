@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { setAlert } from "../../app/reduxStore/actions/AlertActions";
 import { loginAction } from "../../app/reduxStore/actions/AuthActions";
-import { Redirect } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 
 const Login = ({ loginAction, isAuthenticated }) => {
   const [values, setValues] = useState({
@@ -55,7 +55,7 @@ const Login = ({ loginAction, isAuthenticated }) => {
               </Item.Content>
             </Item>
 
-            <Form onSubmit={(form) => submitForm(form)} centered>
+            <Form onSubmit={(form) => submitForm(form)} onCancel={() => <Redirect to='/posts' />} centered>
               <Form.Field>
                 <input
                   name='email'
@@ -76,7 +76,7 @@ const Login = ({ loginAction, isAuthenticated }) => {
                   onChange={(form) => changeInput(form)}
                 />
               </Form.Field>
-              <Button type='submit' floated='right' content='Cancel' />
+              <Button as={NavLink} exact to='/posts' floated='right' content='Cancel' />
               <Button
                 type='submit'
                 floated='right'

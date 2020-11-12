@@ -67,7 +67,7 @@ const Post = ({ auth: { loading, user }, post, clickLike, deletePost }) => {
           }}
         />
 
-        {!loading && post.user === user._id && (
+        {!loading && post.user === user._id && !post.isCompleted && (
           <Button
             onClick={() => {if(window.confirm('Are you sure you want to delete this post?')){deletePost(post._id)}}}
             color='red'
@@ -76,6 +76,8 @@ const Post = ({ auth: { loading, user }, post, clickLike, deletePost }) => {
           />
         )}
 
+
+
         <Button
           as={Link}
           to={`/posts/${post._id}`} //IMPORTANT = backticks = template literals - allow to use JS to specify which post to route to
@@ -83,6 +85,14 @@ const Post = ({ auth: { loading, user }, post, clickLike, deletePost }) => {
           floated='right'
           content='View details'
         />
+
+{!loading && post.isCompleted && (
+          <Button
+            color='green'
+            floated='right'
+            content='Xchange Accepted'
+          />
+        )}
       </Segment>
     </Segment.Group>
   );

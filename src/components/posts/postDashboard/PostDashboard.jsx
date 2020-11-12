@@ -46,19 +46,11 @@ const PostDashboard = ({ getPosts, postStore: { posts } }) => {
           </Segment>
           <Segment attached='top' textAlign='center' color='grey' centered>
             <List divided>
-              <List.Item>
-          <Button
-              onClick={() => setCatValue("", false)}
-              style={{ marginBottom: 10 }}
-              color='purple'
-              content='Show All'
-            ></Button>
-            </List.Item>
             <List.Item>
             <Button
               onClick={() => setCatValue("Playstation 4", true)}
               inverted
-              style={{ marginTop: 10, marginBottom: 10 }}
+              style={{ marginBottom: 10 }}
               color='violet'
               content='Playstation 4'
             ></Button>
@@ -99,6 +91,14 @@ const PostDashboard = ({ getPosts, postStore: { posts } }) => {
               content='Xbox Series'
             ></Button>
             </Item>
+            <List.Item>
+          <Button
+              onClick={() => setCatValue("", false)}
+              style={{ marginTop: 10, marginBottom: 10 }}
+              color='purple'
+              content='Show All'
+            ></Button>
+            </List.Item>
             </List>
           </Segment>
         </Segment.Group>

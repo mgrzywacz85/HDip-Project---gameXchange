@@ -3,12 +3,17 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Loader, Comment, Button, Segment } from "semantic-ui-react";
 import Moment from "react-moment";
-import { acceptXchange, deleteCommentFromPost } from "../../../app/reduxStore/actions/PostActions";
+import {
+  acceptXchange,
+  deleteCommentFromPost,
+} from "../../../app/reduxStore/actions/PostActions";
 
 const PostComment = ({
+  acceptXchange,
   deleteCommentFromPost,
   postUser,
   postID,
+  postIsCompleted,
   comment,
   auth,
 }) => {
@@ -26,27 +31,42 @@ const PostComment = ({
             </div>
           </Comment.Metadata>
 
-          {!auth.loading && auth.user._id === postUser && comment.user !== auth.user._id && (
+          {!auth.loading &&
+            auth.user._id === postUser &&
+            comment.user !== auth.user._id && !postIsCompleted && (
+              <Button.Group floated='right'>
+                <Button
+                  onClick={() => acceptXchange(postID, comment._id)}
+                  color='green'
+                  inverted
+                  content='Accept Xchange'
+                  style={{ right: 0 }}
+                />
+              </Button.Group>
+            )}
+
+          {!auth.loading &&
+            postIsCompleted &&
+            comment.isSelected && (
+              <Button.Group floated='right'>
+                <Button
+                  color='green'
+                  content='Xchange Accepted'
+                  style={{ right: 0 }}
+                />
+              </Button.Group>
+            )}
+
+          {!auth.loading && comment.user === auth.user._id && !postIsCompleted && (
             <Button.Group floated='right'>
               <Button
-                onClick={() => acceptXchange(postID, comment._id)}
-                color='purple'
-                content='Accept Xchange'
+                onClick={() => deleteCommentFromPost(postID, comment._id)}
+                inverted
+                color='red'
+                content='Delete comment'
                 style={{ right: 0 }}
               />
             </Button.Group>
-          )}
-
-          {!auth.loading && comment.user === auth.user._id && (
-                          <Button.Group floated='right'>
-                          <Button
-                          onClick={() => deleteCommentFromPost(postID, comment._id)}
-                          inverted
-                            color='red'
-                            content='Delete comment'
-                            style={{ right: 0 }}
-                          />
-                        </Button.Group>
           )}
 
           <Comment.Text size='big'>{comment.text}</Comment.Text>
@@ -61,11 +81,14 @@ PostComment.propTypes = {
   comment: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   deleteCommentFromPost: PropTypes.func.isRequired,
-  acceptXchange: PropTypes.func.isRequired
+  acceptXchange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.AuthReducer,
 });
 
-export default connect(mapStateToProps, { deleteCommentFromPost, acceptXchange })(PostComment);
+export default connect(mapStateToProps, {
+  deleteCommentFromPost,
+  acceptXchange,
+})(PostComment);

@@ -1,16 +1,17 @@
 import React from "react";
-import { Grid, Segment, Item, Comment, Header } from "semantic-ui-react";
+import { Grid, Segment, Item, Comment, Header, Loader } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import PostCommentForm from "./PostCommentForm";
-import PostComment from './PostComment';
+import PostComment from "./PostComment";
 
-const PostDetailsItem = ({ post: {_id, title, description, photo, comments, user }, auth } ) => {
-
-  return (    
-
-     <Grid centered>
+const PostDetailsItem = ({
+  post: { _id, title, description, photo, comments, user, isCompleted },
+  auth,
+}) => {
+   return auth.loading || _id === null ? <Loader /> :(
+    <Grid centered>
       <Grid.Column width={10}>
         <Segment.Group>
           <Segment attached='top'>
@@ -27,36 +28,41 @@ const PostDetailsItem = ({ post: {_id, title, description, photo, comments, user
             </Item>
           </Segment>
 
-          <Segment attached='bottom' clearing>
-          </Segment>
+          <Segment attached='bottom' clearing></Segment>
         </Segment.Group>
 
         <Segment>
-    <Comment.Group>
-    <Header as='h2' dividing>
-      Comments
-    </Header>
-        {comments.map(comment => (
-          <PostComment key={comment._id} comment={comment} postID={_id} postUser={user} />
-        ))}
-            </Comment.Group>
-      </Segment>
+          <Comment.Group>
+            <Header as='h2' dividing>
+              Comments
+            </Header>
+            {comments.map((comment) => (
+              <PostComment
+                key={comment._id}
+                comment={comment}
+                postID={_id}
+                postUser={user}
+                postIsCompleted={isCompleted}
+              />
+            ))}
+          </Comment.Group>
+        </Segment>
 
-        <PostCommentForm postID={_id}/>
+        {auth.isAuthenticated && <PostCommentForm postID={_id} />}
       </Grid.Column>
-    </Grid> 
-);
-
+    </Grid>
+  );
 };
 
 PostDetailsItem.propTypes = {
-    post: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired
-  };
-  
-  const mapStateToProps = (state) => ({
-    auth: state.AuthReducer,
-    post: state.PostReducer.post
-  });
-  
-  export default connect(mapStateToProps, { })(PostDetailsItem);
+  post: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.AuthReducer,
+  post: state.PostReducer.post,
+  posts: state.PostReducer
+});
+
+export default connect(mapStateToProps, {})(PostDetailsItem);

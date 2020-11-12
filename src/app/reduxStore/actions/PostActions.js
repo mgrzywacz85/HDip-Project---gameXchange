@@ -9,7 +9,7 @@ import {
   GET_SELECTED_POST,
   ADD_COMMENT,
   DELETE_COMMENT,
-  ACCEPT_XCHANGE
+  ACCEPT_XCHANGE,
 } from "./constants";
 
 //GET all Posts
@@ -187,18 +187,16 @@ export const deletePost = (postId) => async (dispatch) => {
   }
 };
 
-export const acceptXchange = (postID, commentID) => async (
-  dispatch
-) => {
+export const acceptXchange = (postID, commentID) => async (dispatch) => {
   try {
-    await axios.put(`/api/posts/comment/${postID}/${commentID}`);
+    const res = await axios.put(`/api/posts/comment/${postID}/${commentID}/accept`);
 
     dispatch({
       type: ACCEPT_XCHANGE,
-      payload: commentID,
+      payload: res.data,
     });
 
-    dispatch(setAlert("Comment deleted"));
+    dispatch(setAlert("Xchange Accepted"));
   } catch (err) {
     dispatch({
       type: POST_ERR,

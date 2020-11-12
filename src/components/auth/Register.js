@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { setAlert} from "../../app/reduxStore/actions/AlertActions";
 import { registerAction } from "../../app/reduxStore/actions/AuthActions";
-import { Redirect } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 
 const Register = ({ setAlert, registerAction, isAuthenticated }) => {
   const [values, setValues] = useState({
@@ -103,7 +103,7 @@ const Register = ({ setAlert, registerAction, isAuthenticated }) => {
                   
                 />
               </Form.Field>
-              <Button type='submit' floated='right' content='Cancel' />
+              <Button as={NavLink} exact to='/posts' floated='right' content='Cancel' />
               <Button
                 type='submit'
                 floated='right'
@@ -111,6 +111,7 @@ const Register = ({ setAlert, registerAction, isAuthenticated }) => {
                 color='violet'
               />
             </Form>
+            
           </Header>
         </Segment>
       </Grid.Column>
