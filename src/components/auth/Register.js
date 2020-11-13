@@ -21,9 +21,10 @@ const Register = ({ setAlert, registerAction, isAuthenticated }) => {
     email: "",
     password: "",
     password2: "",
+    avatar: ""
   });
 
-  const { name, email, password, password2 } = values;
+  const { name, email, avatar, password, password2 } = values;
 
   function changeInput(form) {
     const { name, value } = form.target;
@@ -36,7 +37,7 @@ const Register = ({ setAlert, registerAction, isAuthenticated }) => {
     if (password !== password2) {
       setAlert("Passwords do not match", 'show');
     } else {
-      registerAction({ name, email, password });
+      registerAction({ name, email, avatar, password });
     }
   }
 
@@ -82,7 +83,7 @@ const Register = ({ setAlert, registerAction, isAuthenticated }) => {
                   onChange={(form) => changeInput(form)}
                   
                 />
-              </Form.Field>
+              </Form.Field>              
               <Form.Field>
                 <input
                   name='password'
@@ -103,6 +104,15 @@ const Register = ({ setAlert, registerAction, isAuthenticated }) => {
                   
                 />
               </Form.Field>
+              <Form.Field>
+              <input
+                name='avatar'
+                type='text'
+                placeholder='External link to your avatar photo'
+                value={avatar}
+                onChange={(form) => changeInput(form)}
+              />
+            </Form.Field>
               <Button as={NavLink} exact to='/posts' floated='right' content='Cancel' />
               <Button
                 type='submit'

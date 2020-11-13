@@ -35,7 +35,7 @@ export const loadUserAction = () => async (dispatch) => {
 
 //Register user
 
-export const registerAction = ({ name, email, password }) => async (
+export const registerAction = ({ name, email, avatar, password }) => async (
   dispatch
 ) => {
   const config = {
@@ -44,7 +44,7 @@ export const registerAction = ({ name, email, password }) => async (
     },
   };
 
-  const body = JSON.stringify({ name, email, password });
+  const body = JSON.stringify({ name, email, avatar, password });
 
   try {
     //this is where axios makes the http request

@@ -41,7 +41,7 @@ const PostDashboard = ({ getPosts, postStore: { posts } }) => {
       )}
       <Grid.Column width={3}>
         <Segment.Group textAlign='center'>
-          <Segment attached='top' textAlign='center' color='grey' >
+          <Segment attached='top' textAlign='center' >
             <h4>Category:</h4>
           </Segment>
           <Segment attached='top' textAlign='center' color='grey' centered>
@@ -95,7 +95,7 @@ const PostDashboard = ({ getPosts, postStore: { posts } }) => {
           <Button
               onClick={() => setCatValue("", false)}
               style={{ marginTop: 10, marginBottom: 10 }}
-              color='purple'
+              color='teal'
               content='Show All'
             ></Button>
             </List.Item>

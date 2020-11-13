@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Segment, Item, Comment, Header, Loader } from "semantic-ui-react";
+import { Grid, Segment, Item, Comment, Header, Loader, Button } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -14,9 +14,20 @@ const PostDetailsItem = ({
     <Grid centered>
       <Grid.Column width={10}>
         <Segment.Group>
-          <Segment attached='top'>
-            <h1>{title}</h1>
+          <Segment attached='top' clearing>
+            <h1>{title}           {!auth.loading &&
+            isCompleted && (
+              <Button.Group floated='right'>
+                <Button
+                  color='green'
+                  content='Xchange Accepted'
+                  style={{ right: 0 }}
+                />
+              </Button.Group>
+            )}</h1>     
+
           </Segment>
+
         </Segment.Group>
 
         <Segment.Group>
