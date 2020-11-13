@@ -95,7 +95,7 @@ const PostDashboard = ({ getPosts, postStore: { posts } }) => {
           <Button
               onClick={() => setCatValue("", false)}
               style={{ marginTop: 10, marginBottom: 10 }}
-              color='teal'
+              color='purple'
               content='Show All'
             ></Button>
             </List.Item>

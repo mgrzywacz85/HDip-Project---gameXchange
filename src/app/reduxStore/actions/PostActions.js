@@ -187,9 +187,32 @@ export const deletePost = (postId) => async (dispatch) => {
   }
 };
 
+//Accept Xchange
+
 export const acceptXchange = (postID, commentID) => async (dispatch) => {
   try {
     const res = await axios.put(`/api/posts/comment/${postID}/${commentID}/accept`);
+
+    dispatch({
+      type: ACCEPT_XCHANGE,
+      payload: res.data,
+    });
+
+    dispatch(setAlert("Xchange Accepted"));
+  } catch (err) {
+    dispatch({
+      type: POST_ERR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+
+//Complete Xchange
+
+export const completeXchange = (postID, commentID) => async (dispatch) => {
+  try {
+    const res = await axios.put(`/api/posts/comment/${postID}/${commentID}/complete`);
 
     dispatch({
       type: ACCEPT_XCHANGE,

@@ -67,7 +67,7 @@ const Post = ({ auth: { loading, user }, post, clickLike, deletePost }) => {
           }}
         />
 
-        {!loading && post.user === user._id && !post.isCompleted && (
+        {!loading && post.user === user._id && !post.isAccepted && !post.isCompleted && (
           <Button
             onClick={() => {if(window.confirm('Are you sure you want to delete this post?')){deletePost(post._id)}}}
             color='red'
@@ -86,11 +86,20 @@ const Post = ({ auth: { loading, user }, post, clickLike, deletePost }) => {
           content='View details'
         />
 
+{!loading && post.isAccepted && !post.isCompleted && (
+          <Button
+            color='yellow'
+            floated='right'
+            content='Xchange Pending'
+          />
+        )}
+
+
 {!loading && post.isCompleted && (
           <Button
             color='green'
             floated='right'
-            content='Xchange Accepted'
+            content='Xchange Successful'
           />
         )}
       </Segment>

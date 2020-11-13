@@ -1,5 +1,13 @@
 import React from "react";
-import { Grid, Segment, Item, Comment, Header, Loader, Button } from "semantic-ui-react";
+import {
+  Grid,
+  Segment,
+  Item,
+  Comment,
+  Header,
+  Loader,
+  Button,
+} from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -7,27 +15,49 @@ import PostCommentForm from "./PostCommentForm";
 import PostComment from "./PostComment";
 
 const PostDetailsItem = ({
-  post: { _id, title, description, photo, comments, user, isCompleted },
+  post: {
+    _id,
+    title,
+    description,
+    photo,
+    comments,
+    user,
+    isAccepted,
+    isCompleted,
+  },
   auth,
 }) => {
-   return auth.loading || _id === null ? <Loader /> :(
+  return auth.loading || _id === null ? (
+    <Loader />
+  ) : (
     <Grid centered>
       <Grid.Column width={10}>
         <Segment.Group>
           <Segment attached='top' clearing>
-            <h1>{title}           {!auth.loading &&
-            isCompleted && (
-              <Button.Group floated='right'>
-                <Button
-                  color='green'
-                  content='Xchange Accepted'
-                  style={{ right: 0 }}
-                />
-              </Button.Group>
-            )}</h1>     
+            <h1>
+              {title}{" "}
 
+              {!auth.loading && isAccepted && !isCompleted && (
+                <Button.Group floated='right'>
+                  <Button
+                    color='yellow'          
+                    content='Xchange Pending'
+                    style={{ right: 0 }}
+                  />
+                </Button.Group>
+              )}
+
+              {!auth.loading && isCompleted && (
+                <Button.Group floated='right'>
+                  <Button
+                    color='green'
+                    content='Xchange Successful'
+                    style={{ right: 0 }}
+                  />
+                </Button.Group>
+              )}
+            </h1>
           </Segment>
-
         </Segment.Group>
 
         <Segment.Group>
@@ -54,12 +84,14 @@ const PostDetailsItem = ({
                 postID={_id}
                 postUser={user}
                 postIsCompleted={isCompleted}
+                postIsAccepted={isAccepted}
               />
             ))}
           </Comment.Group>
         </Segment>
 
-        {auth.isAuthenticated && <PostCommentForm postID={_id} />}
+        {auth.isAuthenticated && !isCompleted && <PostCommentForm postID={_id} />}
+
       </Grid.Column>
     </Grid>
   );
@@ -73,7 +105,7 @@ PostDetailsItem.propTypes = {
 const mapStateToProps = (state) => ({
   auth: state.AuthReducer,
   post: state.PostReducer.post,
-  posts: state.PostReducer
+  posts: state.PostReducer,
 });
 
 export default connect(mapStateToProps, {})(PostDetailsItem);

@@ -16,4 +16,4 @@ export const CLICK_LIKE = "CLICK_LIKE";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const ACCEPT_XCHANGE = "ACCEPT_XCHANGE";
-
+export const COMPLETE_XCHANGE = "COMPLETE_XCHANGE";
