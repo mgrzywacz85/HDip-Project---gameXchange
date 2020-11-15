@@ -7,8 +7,10 @@ import { Segment, Comment, Form, Button } from "semantic-ui-react";
 const PostCommentForm = ({ postID, addCommentToPost }) => {
   const [text, setText] = useState("");
 
-  return (
-    <Segment clearing>
+  return (    
+        
+    
+      <Segment clearing>
       <Comment.Group>
         <Form
           onSubmit={(e) => {
@@ -25,13 +27,18 @@ const PostCommentForm = ({ postID, addCommentToPost }) => {
             color='violet'
           />
         </Form>
-      </Comment.Group>
+      </Comment.Group>      
     </Segment>
   );
 };
 
 PostCommentForm.propTypes = {
   addCommentToPost: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
-export default connect(null, { addCommentToPost })(PostCommentForm);
+const mapStateToProps = (state) => ({
+  auth: state.AuthReducer
+});
+
+export default connect(mapStateToProps, { addCommentToPost })(PostCommentForm);

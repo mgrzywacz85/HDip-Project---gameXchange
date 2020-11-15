@@ -85,12 +85,20 @@ const PostDetailsItem = ({
                 postUser={user}
                 postIsCompleted={isCompleted}
                 postIsAccepted={isAccepted}
+                auth={auth}
               />
             ))}
           </Comment.Group>
         </Segment>
 
         {auth.isAuthenticated && !isCompleted && <PostCommentForm postID={_id} />}
+
+        {!auth.isAuthenticated && !isAccepted && !isCompleted && <Segment>
+          <Comment>
+            Log in to comment
+          </Comment>
+          
+          </Segment>}
 
       </Grid.Column>
     </Grid>

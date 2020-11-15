@@ -7,7 +7,7 @@ import { logoutAction } from "../../app/reduxStore/actions/AuthActions";
 
 import { Link } from "react-router-dom";
 
-const NavBar = ({ auth: { isAuthenticated, loading }, logoutAction }) => {
+const NavBar = ({ auth: { isAuthenticated, loading, user }, logoutAction }) => {
 
   const loggedIn = isAuthenticated;
 
@@ -35,7 +35,7 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logoutAction }) => {
 
         {loggedIn && !loading ? (
               <Menu.Item position='right'>
-              <Dropdown pointing='top right' text='Menu'>
+              <Dropdown pointing='top right' text={`Welcome, ${user.name}!`}>
                     <Dropdown.Menu>
                         <Dropdown.Item as={Link} to='/newPost' text='Create Xchange' />
                         <Dropdown.Item onClick={logOutNow} text='Log out' />

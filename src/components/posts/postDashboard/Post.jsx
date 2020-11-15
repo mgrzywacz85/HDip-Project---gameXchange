@@ -67,16 +67,23 @@ const Post = ({ auth: { loading, user }, post, clickLike, deletePost }) => {
           }}
         />
 
-        {!loading && post.user === user._id && !post.isAccepted && !post.isCompleted && (
-          <Button
-            onClick={() => {if(window.confirm('Are you sure you want to delete this post?')){deletePost(post._id)}}}
-            color='red'
-            floated='right'
-            content='Delete'
-          />
-        )}
-
-
+        {!loading &&
+          post.user === user._id &&
+          !post.isAccepted &&
+          !post.isCompleted && (
+            <Button
+              onClick={() => {
+                if (
+                  window.confirm("Are you sure you want to delete this post?")
+                ) {
+                  deletePost(post._id);
+                }
+              }}
+              color='red'
+              floated='right'
+              content='Delete'
+            />
+          )}
 
         <Button
           as={Link}
@@ -86,17 +93,20 @@ const Post = ({ auth: { loading, user }, post, clickLike, deletePost }) => {
           content='View details'
         />
 
-{!loading && post.isAccepted && !post.isCompleted && (
+        {!loading && post.isAccepted && !post.isCompleted && (
           <Button
+            as={Link}
+            to={`/posts/${post._id}`}
             color='yellow'
             floated='right'
             content='Xchange Pending'
           />
         )}
 
-
-{!loading && post.isCompleted && (
+        {!loading && post.isCompleted && (
           <Button
+            as={Link}
+            to={`/posts/${post._id}`}
             color='green'
             floated='right'
             content='Xchange Successful'
