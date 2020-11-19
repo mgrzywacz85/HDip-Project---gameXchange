@@ -36,7 +36,7 @@ const App = () => {
       <Route exact path='/' component={LandingPage} />
 
       <Route
-        path={"/(.+)"} //expression which helps separate the Home page from the NavBar
+        path={"/(.+)"} //Expression which helps separate the Home page from the NavBar
         render={() => (
           <Fragment>
             <NavBar />

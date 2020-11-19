@@ -47,7 +47,7 @@ export const registerAction = ({ name, email, avatar, password }) => async (
   const body = JSON.stringify({ name, email, avatar, password });
 
   try {
-    //this is where axios makes the http request
+    //This is where axios makes the HTTP request
 
     const res = await axios.post("api/user/general", body, config);
 
@@ -56,7 +56,7 @@ export const registerAction = ({ name, email, avatar, password }) => async (
       payload: res.data,
     });
 
-    //and because the token is available, auto-load user
+    //and because the Token is available, auto-load user
 
     dispatch(loadUserAction());
   } catch (err) {
@@ -76,7 +76,8 @@ export const registerAction = ({ name, email, avatar, password }) => async (
 
 export const loginAction = ({ email, password }) => async (dispatch) => {
   const config = {
-    //first need to set up the headers
+
+    //First need to set up the headers
 
     headers: {
       "Content-Type": "application/json",
@@ -88,7 +89,7 @@ export const loginAction = ({ email, password }) => async (dispatch) => {
   const body = JSON.stringify({ email, password });
 
   try {
-    //this is where axios makes the http request
+    //This is where axios makes the HTTP request
 
     const res = await axios.post("api/auth", body, config);
 

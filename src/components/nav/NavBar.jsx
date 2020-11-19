@@ -56,7 +56,6 @@ const NavBar = ({ auth: { isAuthenticated, loading, user }, logoutAction }) => {
           />
         </Menu.Item>
         )}
-        {/* the above will check if the user is logged in */}
       </Container>
     </Menu>
   );

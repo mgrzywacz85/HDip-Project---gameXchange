@@ -78,7 +78,6 @@ export default function postReducer(state = initialState, { type, payload }) {
         loading: false,
       };
     case ACCEPT_XCHANGE:
-      return { ...state, post: payload, loading: false };
     case COMPLETE_XCHANGE:
       return { ...state, post: payload, loading: false };
     default:

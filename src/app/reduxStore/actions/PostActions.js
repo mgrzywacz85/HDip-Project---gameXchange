@@ -10,6 +10,7 @@ import {
   ADD_COMMENT,
   DELETE_COMMENT,
   ACCEPT_XCHANGE,
+  COMPLETE_XCHANGE
 } from "./constants";
 
 //GET all Posts
@@ -167,7 +168,7 @@ export const deleteCommentFromPost = (postID, commentID) => async (
   }
 };
 
-// Delete Post
+//Delete Post
 
 export const deletePost = (postId) => async (dispatch) => {
   try {
@@ -215,7 +216,7 @@ export const completeXchange = (postID, commentID) => async (dispatch) => {
     const res = await axios.put(`/api/posts/comment/${postID}/${commentID}/complete`);
 
     dispatch({
-      type: ACCEPT_XCHANGE,
+      type: COMPLETE_XCHANGE,
       payload: res.data,
     });
 
