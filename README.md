@@ -1,3 +1,9 @@
+## Description
+
+This project was developed by me as my final Capstone project for my Higher Diploma in Computer Science in Software Development in 2020.
+
+The repository contains data for the front-end portion of the project.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
